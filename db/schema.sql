@@ -1,0 +1,3 @@
+DROP DATABASE IF EXISTS pomo_db;
+CREATE DATABASE pomo_db;
+USE pomo_db;

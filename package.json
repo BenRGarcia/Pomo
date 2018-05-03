@@ -1,0 +1,84 @@
+{
+  "name": "pomo",
+  "description": "A Classroom Tool for Teachers",
+  "homepage": "https://github.com/BenRGarcia/Pomo",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BenRGarcia/Pomo"
+  },
+  "bugs": {
+    "url": "https://github.com/BenRGarcia/Pomo/issues",
+    "email": "ben@seebenprogram.com"
+  },
+  "contributors": [
+    {
+      "name": "Jason Aron",
+      "email": "jasonaronart@gmail.com",
+      "url": "http://jasonaronart.com"
+    },
+    {
+      "name": "Melissa Burnham",
+      "email": "melissarburnham@gmail.com",
+      "url": "http://melissarburnham.com/"
+    },
+    {
+      "name": "Davis Troxler",
+      "email": "dtroxler21@gmail.com",
+      "url": "https://github.com/dtroxler21"
+    },
+    {
+      "name": "Ben Garcia",
+      "email": "ben@seebenprogram.com",
+      "url": "http://seebenprogram.com"
+    }
+  ],
+  "scripts": {
+    "start": "node ./bin/www",
+    "dev": "DEBUG=pomo:* npm start",
+    "test": "mocha",
+    "watch": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "bootstrap": "^4.1.1",
+    "connect-redis": "^3.3.3",
+    "cookie-parser": "~1.4.3",
+    "csurf": "^1.9.0",
+    "debug": "~2.6.9",
+    "dotenv": "^5.0.1",
+    "express": "~4.16.0",
+    "express-limiter": "^1.6.1",
+    "express-session": "^1.15.6",
+    "hbs": "~4.0.1",
+    "helmet": "^3.12.0",
+    "hoek": "^5.0.3",
+    "http-errors": "~1.6.2",
+    "jquery": "^3.3.1",
+    "morgan": "~1.9.0",
+    "mysql2": "^1.5.3",
+    "node-sass-middleware": "0.11.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "popper.js": "^1.14.3",
+    "request": "^2.85.0",
+    "sequelize": "^4.37.6",
+    "serve-favicon": "^2.5.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-standard": "^3.1.0",
+    "express-generator": "^4.16.0",
+    "mocha": "^5.1.1",
+    "nightmare": "^2.5.3",
+    "nodemon": "^1.17.3",
+    "sequelize-cli": "^4.0.0"
+  }
+}
