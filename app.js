@@ -10,6 +10,8 @@ require('dotenv').config()
 
 var indexRouter = require('./routes/index')
 var dashboardRouter = require('./routes/dashboard.js')
+var classRouter = require('./routes/class.js')
+var studentRouter = require('./routes/student.js')
 
 var app = express()
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
@@ -33,6 +35,8 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', indexRouter)
 app.use('/api/dashboard', dashboardRouter)
+app.use('/api/classes', classRouter)
+app.use('/api/students', studentRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
