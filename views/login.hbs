@@ -1,0 +1,29 @@
+<h2>Sign In</h2>
+<form id="js-sign-in">
+  <label for="email-sign-in" required>
+    email address
+  </label>
+  <input type="email" placeholder="teacher@example.com" name="email-sign-in" required>
+  <label for="password-sign-in">
+    password
+  </label>
+  <input type="password" name="password-sign-in" required>
+  <button type="submit">
+    Submit
+  </button>
+</form>
+
+<h2>Sign Up</h2>
+<form id="js-sign-up">
+  <label for="email-sign-up" required>
+    email address
+  </label>
+  <input type="email" placeholder="teacher@example.com" name="email-sign-up" required>
+  <label for="password-sign-up">
+    password
+  </label>
+  <input type="password" name="password-sign-up" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%])(?=.{8,32})/g" required>
+  <button type="submit">
+    Submit
+  </button>
+</form>
