@@ -1,1 +1,17 @@
 @import './bootstrap.min.css';
+/**
+ * Yay for SASS variables!
+ */
+$primary-color: #111;
+$secondary-color: #ccc;
+$tertiary-color: #fff;
+
+body {
+  color: $primary-color;
+  background-color: $tertiary-color;
+}
+
+div {
+  border: 1px solid $secondary-color;
+  background-color: $tertiary-color;
+}

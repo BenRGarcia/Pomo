@@ -1,1 +1,8 @@
 @import url(./bootstrap.min.css);
+body {
+  color: #111;
+  background-color: #fff; }
+
+div {
+  border: 1px solid #ccc;
+  background-color: #fff; }
