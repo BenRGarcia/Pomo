@@ -8,18 +8,13 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
       validate: { isEmail: true }
     },
-    password: {
+    password_hash_digest: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        strength: password => {
-          // Contains at least 1 lower, upper, number, symbol, 8-64 chars long
-          const isStrong = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%])(?=.{8,32})/g
-          if (!isStrong.test(password)) {
-            throw new Error(`Passwords must have at least 1 lowercase, 1 uppercase, 1 number, and 1 symbol: ! @ # $ %`)
-          }
-        }
-      }
+      allowNull: false
+    },
+    salt: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   })
 
