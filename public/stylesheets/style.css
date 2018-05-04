@@ -1,4 +1,7 @@
 @import url(./bootstrap.min.css);
+/**
+ * Yay for SASS variables!
+ */
 body {
   color: #111;
   background-color: #fff; }
