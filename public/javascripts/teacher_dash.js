@@ -1,7 +1,9 @@
 $(function () {
   // choose a class to view
   $('#view_class').on('click', function (event) {
-    $.ajax('/api/class', {
+    var id = $(this).data('id')
+
+    $.ajax('/api/class/' + id, {
       type: 'GET'
     }).then(
       function () {
@@ -12,11 +14,13 @@ $(function () {
   })
   // delete a class
   $('#delete_class').on('click', function (event) {
-    $.ajax('/api/class' + id, {
+    var id = $(this).data('id')
+
+    $.ajax('/api/class/' + id, {
       type: 'DELETE'
     }).then(
       function () {
-        console.log('login successful')
+        console.log('deleted class', id)
         location.reload()
       }
     )
@@ -27,7 +31,7 @@ $(function () {
       type: 'GET'
     }).then(
       function () {
-        console.log('login successful')
+        console.log('view storefront successful')
         location.reload()
       }
     )
