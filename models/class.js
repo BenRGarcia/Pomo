@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   Class.associate = function (models) {
-    Class.belongsTo(models.User) {
+    Class.belongsTo(models.User), {
       foreignKey: {
         allowNull: false
       }
