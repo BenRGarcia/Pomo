@@ -6,7 +6,7 @@ $(function () {
     }).then(
       function () {
         console.log('login successful')
-        location.reload()
+        window.location.reload()
       }
     )
   })
@@ -17,7 +17,7 @@ $(function () {
     }).then(
       function () {
         console.log('login successful')
-        location.reload()
+        window.location.reload()
       }
     )
   })
@@ -28,7 +28,7 @@ $(function () {
     }).then(
       function () {
         console.log('login successful')
-        location.reload()
+        window.location.reload()
       }
     )
   })
