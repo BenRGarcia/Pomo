@@ -33,16 +33,6 @@ router.route('/api/classes')
       res.json(dbClass)
     })
   })
-  // DELETE requests for this path
-  .delete((req, res, next) => {
-    db.Class.destroy({
-      where: {
-        id: req.params.id
-      }
-    }).then(function (dbClass) {
-      res.json(dbClass)
-    })
-  })
 
 router.route('/api/classes/:id')
   // GET requests for this path

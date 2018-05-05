@@ -30,8 +30,8 @@ router.route('/api/students')
         where: {
           id: req.body.id
         }
-      }).then(function(dbStudent) {
-      res.json(dbStudent);
+      }).then(function (dbStudent) {
+      res.json(dbStudent)
     })
   })
   // DELETE requests for this path
