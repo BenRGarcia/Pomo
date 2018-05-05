@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   })
 
-  Class.associate = function(models) {
+  Class.associate = function (models) {
     Class.belongsTo(models.User), {
       foreignKey: {
         allowNull: false
@@ -21,7 +21,6 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   }
-
 
   return Class
 }
