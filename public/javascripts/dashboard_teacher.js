@@ -46,58 +46,24 @@ $(function () {
 
     $('#js-modal-delete-class').modal('show') // has form input and submit button
 
+    var userInput = $('#js-modal-delete-input').val()
+    
+    if (userInput === class_name) {
+      $('#js-modal-delete-class').prop('disabled', false)
+    } else {
+      $('#js-modal-delete-class').prop('disabled', true)      
+    }
+      
     $('#js-modal-delete-class').on('submit', 'form', e => {
       e.preventDefault()
-
-      // Get value of user input in modal
-      var userInput = $('#js-modal-delete-input').val()
-
-      // check if user input of class name matches the actual class name they are trying to delete
-      if (userInput === class_name) {
         $.ajax('/api/class/' + class_uuid, {
           type: 'DELETE'
         }).then(
-          function () {
-            console.log('deleted class', class_uuid)
-            window.location.reload()
-          }
-        )
-      } else {
-
-      }
+        function () {
+          console.log('deleted class', class_uuid)
+          window.location.reload()
+        }
+      )
     })
-
-    /**
-     * waaay later
-     */
-  })
-
-  // choose a class to view
-  $('#view_class').on('click', function (event) {
-    var id = $(this).data('id')
-  })
-  // delete a class
-  $('#delete_class').on('click', function (event) {
-    var id = $(this).data('id')
-
-    $.ajax('/api/class/' + id, {
-      type: 'DELETE'
-    }).then(
-      function () {
-        console.log('deleted class', id)
-        window.location.reload()
-      }
-    )
-  })
-  // view storefront
-  $('#storefront').on('click', function (event) {
-    $.ajax('/api/storefront', {
-      type: 'GET'
-    }).then(
-      function () {
-        console.log('view storefront successful')
-        window.location.reload()
-      }
-    )
   })
 })
