@@ -54,17 +54,38 @@ $(function () {
     // get the attribute of each button
     var increment_coin = $(e.target).data('increment_coin')
     var student_uuid = $(e.target).data('student_uuid') 
-  
-  })
+    var coin_amount = increment_coin.val()
+
+    var new_coin_value = {
+      coin_count: coin_amount++
+    }
+
+    $.put('/api/student/add' + student_uuid, new_coin_value)
+      .then(
+        e => {
+          window.location.reload()
+        }
+      )
+    })
 
   // **delete coin from each student
   $('body').on('click', 'span[data-coin-adjust=coin]', e => {
 
     // get the attribute of each button
-    var decrement_coin = $(e.target).data('decrement_coin')    
+    var decrement_coin = $(e.target).data('decrement_coin') 
+    var student_uuid = $(e.target).data('student_uuid') 
+    var coin_amount = decrement_coin.val()
+
+    var new_coin_value = {
+      coin_count: coin_amount--
+    }
+    $.put('/api/student/add' + student_uuid, new_coin_value)
+      .then(
+        e => {
+          window.location.reload()
+        }
+      )   
   })
-
-
  
   // add student to class
   $('body').on('click', '#js-add-student', e => {
