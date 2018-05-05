@@ -1,48 +1,40 @@
+// Wait until page loads
 $(function () {
-  // when user hits login submit
-  $('#login').on('click', function (event) {
-    var id = $(this).data('id')
+  /**
+   * When user submits login/signup form
+   */
+  $('body').on('submit', '#login', e => {
+  // Prevent default reloading of page
+    e.preventDefault()
 
-    $.ajax('/api/user' + id, {
-      type: 'GET'
-    }).then(
-      function () {
-        console.log('login successful')
-        window.location.reload()
-      }
-    )
-  })
-  // when user hits the sign up tab --- not sure we need this one
-  $('#signup_tab').on('click', function (event) {
-    $.ajax('/api/teachers', {
-      type: 'GET'
-    }).then(
-      function () {
-        console.log('login successful')
-        window.location.reload()
-      }
-    )
-  })
+    // Get values from user input
+    var radioButtonValue = $('input[name=isLogin]:checked').val()
+    var email = $('#email').val().trim()
+    var password = $('#password').val().trim()
+    var _csrf = $('#_csrf').val().trim()
+    var user = { email, password, _csrf }
+    var path
 
-  $('#signup_submit').on('click', function (event) {
-    var id = $(this).data('id')
-    var email = $('#signUpEmail').val().trim()
-    var password = $('#signUpPassword').val().trim()
-    var hidden = $('#hidden').val().trim()
+    // Clear elements on the screen
+    $('#signUpEmail').val('')
+    $('#password').val('')
+    $('#_csrf').val('')
 
-    var newTeacher = {
-      email: email,
-      password_hash_digest: password,
-      _csrf: hidden
-    }
-    $.ajax('/api/users' + id, {
-      type: 'POST',
-      data: newTeacher
-    }).then(
-      function () {
-        console.log('signup successful', id)
-        window.location.reload()
-      }
-    )
+    // Determine path if user is logging in or signing up
+    if (radioButtonValue === 'login') path = '/api/user/login'
+    else if (radioButtonValue === 'signup') path = '/api/user/signup'
+
+    // Send post request
+    $.post(path, user)
+      .then(res => {
+        if (res.isAuthenticated) {
+          window.location.replace(res.redirect)
+        } else {
+          // somehow alert user "Incorrect email/password combination"
+          // $('#alert-div').addClass('text-red')
+          // $('#alert-div').text('Incorrect email/password combination')
+        }
+      })
+      .catch(err => console.error(err.message))
   })
 })
