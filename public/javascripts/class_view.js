@@ -9,7 +9,7 @@ $(function () {
     }).then(
       function () {
         console.log('login successful')
-        location.reload()
+        window.location.reload()
       }
     )
   })
@@ -32,7 +32,7 @@ $(function () {
     }).then(
       function () {
         console.log('added newValues to' + id)
-        location.reload()
+        window.location.reload()
       }
     )
   })
@@ -45,7 +45,7 @@ $(function () {
     }).then(
       function () {
         console.log('login successful')
-        location.reload()
+        window.location.reload()
       }
     )
   })
@@ -58,7 +58,7 @@ $(function () {
     }).then(
       function () {
         console.log('deleted coins from' + id)
-        location.reload()
+        window.location.reload()
       }
     )
   })
@@ -69,7 +69,7 @@ $(function () {
     }).then(
       function () {
         console.log('view store successful')
-        location.reload()
+        window.location.reload()
       }
     )
   })
@@ -89,7 +89,7 @@ $(function () {
     }).then(
       function () {
         console.log('new student add', newStudentName)
-        location.reload()
+        window.location.reload()
       }
     )
   })
@@ -102,7 +102,7 @@ $(function () {
     }).then(
       function () {
         console.log('student deleted', id)
-        location.reload()
+        window.location.reload()
       }
     )
   })
@@ -113,7 +113,7 @@ $(function () {
     }).then(
       function () {
         console.log('login successful')
-        location.reload()
+        window.location.reload()
       }
     )
   })
