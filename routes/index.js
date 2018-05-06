@@ -1,5 +1,6 @@
 var express = require('express')
 var router = express.Router()
+var db = require('../models')
 
 /**
  * HTML Routes
@@ -7,7 +8,7 @@ var router = express.Router()
 
 // Home page
 router.get('/', (req, res, next) => {
-  res.render('index', { title: 'Express' })
+  res.render('index')
 })
 
 // Class store (hard coded feature)
@@ -27,20 +28,32 @@ router.get('/teacher/signup', (req, res, next) => {
 
 // Teacher dashboard
 router.get('/teacher/:uuid/dashboard', (req, res, next) => {
+  var uuid = req.params.uuid
   // Run sequelize query here, pass to .hbs
-  res.render('teacherDashboard', {/* give me db results */})
+  db.User.find({...}, where: {...}, include: {...})
+    .then(resp => {
+      res.render('teacherDashboard', resp)
+    })
 })
 
 // Teacher create, edit class
 router.get('/teacher/:uuid/edit', (req, res, next) => {
+  var uuid = req.params.uuid
   // Run sequelize query here, pass to .hbs
-  res.render('classEdit', {/* give me db results */ })
+  db.User.find({...}, where: {...}, include: {...})
+    .then(resp => {
+      res.render('classEdit', resp)
+    })
 })
 
 // Teacher manage class (day to day stuff)
 router.get('/teacher/:uuid/manage', (req, res, next) => {
+  var uuid = req.params.uuid
   // Run sequelize query here, pass to .hbs
-  res.render('classManage', {/* give me db results */ })
+  db.User.find({...}, where: {...}, include: {...})
+    .then(resp => {
+      res.render('classManage', resp)
+    })
 })
 
 // Student login
@@ -50,8 +63,12 @@ router.get('/student/login', (req, res, next) => {
 
 // Student dashboard
 router.get('/student/:uuid/dashboard', (req, res, next) => {
+  var uuid = req.params.uuid
   // Run sequelize query here, pass to .hbs
-  res.render('studentDashboard', {/* give me db results */})
+  db.Student.find({...}, where: { ...}, include: { ...})
+    .then(resp => {
+      res.render('studentDashboard', resp)
+    })
 })
 
 module.exports = router
