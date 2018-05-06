@@ -4,8 +4,21 @@ Here is the page where the teacher will be able to:
   2) See a list of classes which link to the classManage.hbs page
   3) Have a button that can delete a class (with modal delete verification)
 --}}
+<title>{{title}}</title>
+{{!-- NOT SURE HOW TO ACCESS USER INFO AND/OR MULTIPLE TABLES! --}}
+{{#if user.class}}
+  {{#each user.class}}
+    <a href='{{> classManage}}'>
+      <div class="card">
+        <div class="card-body">
+          {{this.class.name}}  
+          <span>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#js-delete-class" data-delete="class"></button>  
+          </span> 
+        </div>
+      </div>
+    </a>
+  {{/each}}
+{{/if}}
 
-{{!-- this button will toggle modal for deleting class--should be next to all classes listed --}}
-<span>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#js-delete-class" data-delete="class"></button>  
-</span>
+<p>Click <a href='#'>HERE</a> to add a new class</p>
