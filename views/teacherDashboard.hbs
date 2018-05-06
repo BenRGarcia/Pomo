@@ -11,14 +11,12 @@ Here is the page where the teacher will be able to:
     <a href='{{> classManage}}'>
       <div class="card">
         <div class="card-body">
-          {{this.class.name}}  
-          <span>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#js-delete-class" data-delete="class"></button>  
-          </span> 
+          {{user.class.name}}  
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#js-delete-class" data-delete="class"><span class="glyphicon">&#xe020;</span></button>  
         </div>
       </div>
     </a>
   {{/each}}
 {{/if}}
 
-<p>Click <a href='#'>HERE</a> to add a new class</p>
+<p>Click <a href='{{>classEdit}}'>HERE</a> to add a new class</p>
