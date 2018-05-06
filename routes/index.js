@@ -50,6 +50,7 @@ router.get('/student/login', (req, res, next) => {
 
 // Student dashboard
 router.get('/student/:uuid/dashboard', (req, res, next) => {
+  // Run sequelize query here, pass to .hbs
   res.render('studentDashboard', {/* give me db results */})
 })
 
