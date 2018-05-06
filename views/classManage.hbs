@@ -7,9 +7,32 @@ Here is the page where the teacher will be able to:
   4) Award coins to each student
 --}}
 
-
+<thead>
+  <tr>
+    <th class="checkbox"><label><input type="checkbox" value="" id='js-select-all'>Select All</label></th>
+    <th>Student Name</th>
+    <th>Coin Count/Edit</th>
+    <th>Time Remaining</th>
+    <th>Finished Task(s)</th>       
+  </tr>
+</thead>
+<tbody>
+  {{#each Student}}
+    <tr>
+      <td class="checkbox"><label><input type="checkbox" value="" data-add='student' id='js-select-all'></label></td>
+      <td>{{Student.name}}</td>
+      <td contenteditable='true'>{{student.task.coin_count}}</td>
+      {{!-- NEED TO WRITE JS TO CALCULATE TIME REMAINING --}}
+      <td>{{student.task.timeRemaining}}</td>
+      <td>{{#if isDone}}
+            <span class="glyphicon">&#xe013;</span>
+          {{/if}}  
+      </td>
+    </tr>
+  {{/each}}
+</tbody>
 
 {{!-- this button will toggle modal too add tasks --}}
 <span>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#js-modal-task-assignment" data-delete="class"></button>  
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#js-modal-task-assignment" data-delete="class">ADD TASKS</button>  
 </span>
