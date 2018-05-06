@@ -20,10 +20,10 @@ Here is the page where the teacher will be able to:
   {{#each Student}}
     <tr>
       <td class="checkbox"><label><input type="checkbox" value="" data-add='student' id='js-select-all'></label></td>
-      <td>{{Student.name}}</td>
-      <td contenteditable='true'>{{student.task.coin_count}}</td>
+      <td>{{name}}</td>
+      <td contenteditable='true'>{{coin_count}}</td>
       {{!-- NEED TO WRITE JS TO CALCULATE TIME REMAINING --}}
-      <td>{{student.task.timeRemaining}}</td>
+      <td>{{timeRemaining}}</td>
       <td>{{#if isDone}}
             <span class="glyphicon">&#xe013;</span>
           {{/if}}  
