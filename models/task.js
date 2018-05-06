@@ -1,21 +1,22 @@
 module.exports = (sequelize, DataTypes) => {
   const Task = sequelize.define('Task', {
+    uuid: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        len: [1]
-      }
+      validate: { len: [1] }
     },
     timer_duration: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      validate: {
-        len: [1]
-      }
+      allowNull: false
     },
     start_time: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      allowNull: true
     },
     is_done: {
       type: DataTypes.BOOLEAN,
@@ -23,16 +24,13 @@ module.exports = (sequelize, DataTypes) => {
     },
     coin_value: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      validate: { min: 0 }
     }
   })
 
-  Task.associate = function(models) {
-    Task.belongsTo(models.Student), {
-      foreignKey: {
-        allowNull: false
-      }
-    }
+  Task.associate = models => {
+    Task.belongsTo(models.Student, { foreignKey: { allowNull: false } })
   }
 
   return Task
