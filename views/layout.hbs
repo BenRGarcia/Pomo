@@ -2,12 +2,15 @@
 <html>
   <head>
     <title>{{title}}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />    
+    <link rel='stylesheet' href='/stylesheets/style.css' /> 
+    <link rel='stylesheet'href='/stylesheets/studentli.css' />   
   </head>
   <body>
-    <div class="container-fluid">
+
+   
       {{> navigation }}
       {{> header }}
+    <div class="container" id="wood-panel">
       {{{ body }}}
       {{> footer}}
     </div>
