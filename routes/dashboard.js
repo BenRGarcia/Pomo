@@ -1,6 +1,7 @@
 var express = require('express')
 var router = express.Router()
 var db = require('../models')
+var passport = require('../config/passport.js')
 var isAuthenticated = require('./utils/isAuthenticated.js')
 
 /**
@@ -9,8 +10,29 @@ var isAuthenticated = require('./utils/isAuthenticated.js')
  *     (uuid added to `req` object by `isAuthenticated` middleware)
  */
 
+router.route('/login')
+  .post(passport.authenticate('local'), (req, res, next) => {
+    res.json('/teacher/dashboard')
+  })
+
+router.route('/signup')
+  .post((req, res, next) => {
+    db.User.create({ email: req.body.email, password: req.body.password })
+      .then(() => res.redirect(307, '/api/teacher/login'))
+      .catch((err) => res.status(422).json(err.errors[0].message))
+  })
+
+router.route('/logout')
+  .post(isAuthenticated, (req, res, next) => {
+    // Passport.js method to end user session
+    req.logout()
+    // express-session method to destroy session in redis
+    req.session.destroy(err => console.error(err))
+    res.json('/')
+  })
+
 // This path is for the teacher to see their dashboard list of classes and be able to delete a class
-router.route('/:uuid/dashboard')
+router.route('/dashboard')
   // Teacher wants to see the list of classes
   .get((req, res, next) => {
     // Database query to return array of classes
