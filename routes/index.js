@@ -27,34 +27,34 @@ router.get('/teacher/signup', (req, res, next) => {
 })
 
 // Teacher dashboard
-router.get('/teacher/:uuid/dashboard', (req, res, next) => {
+/* router.get('/teacher/:uuid/dashboard', (req, res, next) => {
   var uuid = req.params.uuid
   // Run sequelize query here, pass to .hbs
   db.User.find({...}, where: {...}, include: {...})
     .then(resp => {
       res.render('teacherDashboard', resp)
     })
-})
+}) */
 
 // Teacher create, edit class
-router.get('/teacher/:uuid/edit', (req, res, next) => {
+/* router.get('/teacher/:uuid/edit', (req, res, next) => {
   var uuid = req.params.uuid
   // Run sequelize query here, pass to .hbs
   db.User.find({...}, where: {...}, include: {...})
     .then(resp => {
       res.render('classEdit', resp)
     })
-})
+}) */
 
 // Teacher manage class (day to day stuff)
-router.get('/teacher/:uuid/manage', (req, res, next) => {
+/* router.get('/teacher/:uuid/manage', (req, res, next) => {
   var uuid = req.params.uuid
   // Run sequelize query here, pass to .hbs
   db.User.find({...}, where: {...}, include: {...})
     .then(resp => {
       res.render('classManage', resp)
     })
-})
+}) */
 
 // Student login
 router.get('/student/login', (req, res, next) => {
@@ -62,13 +62,13 @@ router.get('/student/login', (req, res, next) => {
 })
 
 // Student dashboard
-router.get('/student/:uuid/dashboard', (req, res, next) => {
+/* router.get('/student/:uuid/dashboard', (req, res, next) => {
   var uuid = req.params.uuid
   // Run sequelize query here, pass to .hbs
   db.Student.find({...}, where: { ...}, include: { ...})
     .then(resp => {
       res.render('studentDashboard', resp)
     })
-})
+}) */
 
 module.exports = router
