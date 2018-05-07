@@ -12,11 +12,6 @@ var isAuthenticated = require('./utils/isAuthenticated.js')
 
 router.route('/login')
   .post(passport.authenticate('local'), (req, res, next) => {
-    /*     console.log(`\n====================================================
-UUID: ${req.uuid} has logged in and is authenticated
-=====================================================\n`) */
-    console.log(`\nrequest:\n`)
-    console.log(req)
     res.json('/teacher/dashboard')
   })
 
