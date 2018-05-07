@@ -3,7 +3,6 @@ var router = express.Router()
 var db = require('../models')
 var passport = require('../config/passport.js')
 var isAuthenticated = require('./utils/isAuthenticated.js')
-
 /**
  * Discover API path '/api/teacher'
  *   - To access teacher's UUID: `req.uuid`
