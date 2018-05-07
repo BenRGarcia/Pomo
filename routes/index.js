@@ -9,6 +9,8 @@ var isAuthenticated = require('./utils/isAuthenticated.js')
 
 /**
  * Static pages
+ *   - To access teacher's UUID: `req.uuid`
+ *     (uuid added to `req` object by `isAuthenticated` middleware)
  */
 
 // Home page
@@ -31,44 +33,69 @@ router.get('/teacher/store', (req, res, next) => res.render('store'))
  */
 
 // Teacher dashboard page
-router.get('/teacher/:uuid/dashboard', /* isAuthenticated, */(req, res, next) => {
-  var uuid = req.params.uuid
+router.get('/teacher/dashboard', /* isAuthenticated, */(req, res, next) => {
   // Davis - how do we query the DB for all the teacher's classes?
-  db.User.find({ where: { uuid }, include: { model: db.Class } })
-    // Sending json response simply to debug - will delete before production
+  db.User.find({
+    where: { uuid: req.uuid },
+    include: { model: db.Class }
+  })
     .then(resp => res.json(resp))
     // .then(resp => res.render('teacherDashboard', resp))
     .catch(err => res.json(err))
 })
 
-// Teacher create, edit class
-/* router.get('/teacher/:uuid/edit', (req, res, next) => {
-  var uuid = req.params.uuid
-  // Run sequelize query here, pass to .hbs
-  // db.User.find({...}, where: {...}, include: {...})
-    .then(resp => {
-      res.render('classEdit', resp)
-    })
-}) */
+// Teacher edits a class page (add/delete students in the class)
+router.get('/teacher/class/:uuid/edit', /* isAuthenticated, */(req, res, next) => {
+  // Davis - how do we query the DB for all students in a teacher's individual class?
+  db.User.find({
+    where: { uuid: req.uuid },
+    include: {
+      model: db.Class,
+      where: { uuid: req.params.uuid },
+      include: {
+        model: db.Student,
+        where: { class_uuid: req.params.uuid }
+      }
+    }
+  })
+    .then(resp => res.json(resp))
+    // .then(resp => res.render('classEdit', resp))
+    .catch(err => res.json(err))
+})
 
-// Teacher manage class (day to day stuff)
-/* router.get('/teacher/:uuid/manage', (req, res, next) => {
-  var uuid = req.params.uuid
-  // Run sequelize query here, pass to .hbs
-  // db.User.find({...}, where: {...}, include: {...})
-    .then(resp => {
-      res.render('classManage', resp)
-    })
-}) */
+// Teacher sets tasks, times to students (day to day stuff)
+router.get('/teacher/class/:uuid', /* isAuthenticated, */(req, res, next) => {
+  // Davis - how do we query the DB for all students in a teacher's individual class?
+  db.User.find({
+    where: { uuid: req.uuid },
+    include: {
+      model: db.Class,
+      where: { uuid: req.params.uuid },
+      include: {
+        model: db.Student,
+        where: { class_uuid: req.params.uuid }
+      }
+    }
+  })
+    .then(resp => res.json(resp))
+    // .then(resp => res.render('classManage', resp))
+    .catch(err => res.json(err))
+})
 
 // Student dashboard
-/* router.get('/student/:uuid/dashboard', (req, res, next) => {
+router.get('/dashboard/student/:uuid', (req, res, next) => {
   var uuid = req.params.uuid
-  // Run sequelize query here, pass to .hbs
-  // db.Student.find({...}, where: { ...}, include: { ...})
-    .then(resp => {
-      res.render('studentDashboard', resp)
-    })
-}) */
+  // Davis - how do we query the DB for a student's incomplete tasks?
+  db.Student.find({
+    where: { uuid },
+    include: {
+      model: db.Task,
+      where: { is_done: false }
+    }
+  })
+    .then(resp => res.json(resp))
+    // .then(resp => res.render('studentDashboard', resp))
+    .catch(err => res.json(err))
+})
 
 module.exports = router
