@@ -8,7 +8,10 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, don
       if (!user || !user.validPassword(password)) {
         return done(null, false, { msg: 'Incorrect email/password combination.' })
       }
-      return done(null, user)
+      // After authentication, remove sensitive info from user object
+      user.dataValues.email = null
+      user.dataValues.password = null
+      return done(null, user.dataValues)
     })
     .catch(err => done(err))
 }))
