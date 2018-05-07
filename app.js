@@ -39,11 +39,10 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(sassMiddleware(sassConfig))
 
-app.use(express.static(path.join(__dirname, 'public')))
-
 var limiter = require('express-limiter')(app, client)
 limiter(limiterConfig)
 
+app.use(express.static(path.join(__dirname, 'public')))
 app.use('/', indexRouter)
 app.use('/api/teacher', teacherRouter)
 app.use('/api/students', studentRouter)
