@@ -10,6 +10,9 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: { len: [1] }
     }
+  }, {
+    timestamps: false,
+    underscored: true
   })
 
   Class.associate = (models) => {

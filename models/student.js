@@ -15,6 +15,9 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: 0,
       validate: { min: 0 }
     }
+  }, {
+    timestamps: false,
+    underscored: true
   })
 
   Student.associate = models => {

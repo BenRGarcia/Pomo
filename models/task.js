@@ -27,6 +27,9 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: { min: 0 }
     }
+  }, {
+    timestamps: false,
+    underscored: true
   })
 
   Task.associate = models => {
