@@ -30,7 +30,7 @@ router.get('/teacher/signup', (req, res, next) => {
 router.get('/teacher/:uuid/dashboard', (req, res, next) => {
   var uuid = req.params.uuid
   // Run sequelize query here, pass to .hbs
-  db.User.find({...}, where: {...}, include: {...})
+  // db.User.find({...}, where: {...}, include: {...})
     .then(resp => {
       res.render('teacherDashboard', resp)
     })
@@ -40,7 +40,7 @@ router.get('/teacher/:uuid/dashboard', (req, res, next) => {
 router.get('/teacher/:uuid/edit', (req, res, next) => {
   var uuid = req.params.uuid
   // Run sequelize query here, pass to .hbs
-  db.User.find({...}, where: {...}, include: {...})
+  // db.User.find({...}, where: {...}, include: {...})
     .then(resp => {
       res.render('classEdit', resp)
     })
@@ -50,7 +50,7 @@ router.get('/teacher/:uuid/edit', (req, res, next) => {
 router.get('/teacher/:uuid/manage', (req, res, next) => {
   var uuid = req.params.uuid
   // Run sequelize query here, pass to .hbs
-  db.User.find({...}, where: {...}, include: {...})
+  // db.User.find({...}, where: {...}, include: {...})
     .then(resp => {
       res.render('classManage', resp)
     })
@@ -65,7 +65,7 @@ router.get('/student/login', (req, res, next) => {
 router.get('/student/:uuid/dashboard', (req, res, next) => {
   var uuid = req.params.uuid
   // Run sequelize query here, pass to .hbs
-  db.Student.find({...}, where: { ...}, include: { ...})
+  // db.Student.find({...}, where: { ...}, include: { ...})
     .then(resp => {
       res.render('studentDashboard', resp)
     })

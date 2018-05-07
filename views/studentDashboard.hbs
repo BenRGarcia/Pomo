@@ -5,20 +5,13 @@
     Time to focus!
   </h2>
   <div>
-    <img
-      src=""
-      alt="Virtual coins"
-    >
+    <img src="" alt="Virtual coins">
   </div>
   <div>
-    <span
-      id="js-timer-minutes"
-    >
+    <span id="js-timer-minutes">
     </span>
     :
-    <span
-      id="js-timer-seconds"
-    >
+    <span id="js-timer-seconds">
     </span>
   </div>
 </section>
@@ -28,13 +21,13 @@
     Task
   </h1>
   {{#if tasks}}
-    <ul>
-      {{#each tasks}}
-        <li>
-          {{name}}
-        </li>
-      {{/each}}
-    </ul>
+  <ul>
+    {{#each tasks}}
+    <li>
+      {{name}}
+    </li>
+    {{/each}}
+  </ul>
   {{/if}}
   <button>
     Done!
