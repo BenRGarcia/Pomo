@@ -22,7 +22,7 @@ var studentRouter = require('./routes/student.js')
 // var csurf = require('csurf')
 // var csrfProtection = csrf({ cookie: true })
 var app = express()
-var limiter = require('express-limiter')(app, client)
+
 app.use(helmet())
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 
@@ -41,6 +41,7 @@ app.use(sassMiddleware(sassConfig))
 
 app.use(express.static(path.join(__dirname, 'public')))
 
+var limiter = require('express-limiter')(app, client)
 limiter(limiterConfig)
 
 app.use('/', indexRouter)
