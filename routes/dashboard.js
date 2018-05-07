@@ -1,9 +1,12 @@
 var express = require('express')
 var router = express.Router()
 var db = require('../models')
+var isAuthenticated = require('./utils/isAuthenticated.js')
 
 /**
  * Discover API path '/api/teacher'
+ *   - To access teacher's UUID: `req.uuid`
+ *     (uuid added to `req` object by `isAuthenticated` middleware)
  */
 
 // This path is for the teacher to see their dashboard list of classes and be able to delete a class
