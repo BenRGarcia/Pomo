@@ -4,6 +4,8 @@ var db = require('../models')
 
 /**
  * Discover API path '/api/teacher'
+ *   - To access teacher's UUID: `req.uuid`
+ *     (uuid added to `req` object by `isAuthenticated` middleware)
  */
 
 // This path is for the teacher to see their dashboard list of classes and be able to delete a class
