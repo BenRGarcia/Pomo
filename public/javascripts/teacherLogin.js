@@ -20,12 +20,8 @@ $(function () {
     $('#password').val('')
     $('#_csrf').val('')
 
-    // Determine path if user is logging in or signing up
-    if (radioButtonValue === 'login') path = '/api/user/login'
-    else if (radioButtonValue === 'signup') path = '/api/user/signup'
-
     // Send post request
-    $.post(path, user)
+    $.post('/api/teacher/login', user)
       .then(res => {
         if (res.isAuthenticated) {
           window.location.replace(res.redirect)
