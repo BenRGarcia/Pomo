@@ -11,7 +11,10 @@ var isAuthenticated = require('./utils/isAuthenticated.js')
 
 router.route('/login')
   .post(passport.authenticate('local'), (req, res, next) => {
-    res.json('/teacher/dashboard')
+    res.json({
+      isAuthenticated: true,
+      redirectPath: '/teacher/dashboard'
+    })
   })
 
 router.route('/signup')
@@ -35,7 +38,7 @@ router.route('/dashboard')
   // Teacher wants to see the list of classes
   .get((req, res, next) => {
     // Database query to return array of classes
-    db.User.findAll({ where: { uuid: req.params.uuid }, include: [db.Class] })
+    db.User.findAll({ where: { uuid: req.uuid }, include: [db.Class] })
       // Send json object to frontend
       .then(resp => res.json(resp))
   })
