@@ -50,8 +50,7 @@ router.get('/teacher/class/:uuid/manage', /* isAuthenticated, */(req, res, next)
       required: false
     }]
   })
-    // .then(students => res.render('classManage', { students, layout: '/layouts/layoutTeacher' }))
-    .then(resp => res.json(resp))
+    .then(students => res.render('classManage', { students, layout: '/layouts/layoutTeacher' }))
     .catch(err => res.json(err))
 })
 
