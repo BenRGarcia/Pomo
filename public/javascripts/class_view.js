@@ -91,7 +91,7 @@ $(function () {
       e.preventDefault()
 
       var newStudentName = $('#new_student').val().trim()
-      var coin_count = $('#coint_count').val().trim()
+      var coin_count = $('#coin_count').val().trim()
 
       var addNewStudent = {
         name: newStudentName,
