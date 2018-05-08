@@ -3,7 +3,7 @@ var router = express.Router()
 var db = require('../models')
 var isAuthenticated = require('./utils/isAuthenticated.js')
 var csrf = require('csurf')
-var csrfProtection = csrf({ cookie: true })
+var csrfProtection = csrf()
 
 /***************
  * HTML Routes *
@@ -22,10 +22,14 @@ router.get('/', (req, res, next) => res.render('index', { layout: '/layouts/layo
 router.get('/student/login', (req, res, next) => res.render('studentLogin', { layout: '/layouts/layoutStudent' }))
 
 // Teacher log in page
-router.get('/teacher/login', (req, res, next) => res.render('teacherLogin', { layout: '/layouts/layoutHome' }))
+router.get('/teacher/login', csrfProtection, (req, res, next) => {
+  res.render('teacherLogin', { layout: '/layouts/layoutHome', csrfToken: req.csrfToken() })
+})
 
 // Teacher sign up page
-router.get('/teacher/signup', (req, res, next) => res.render('teacherSignup', { layout: '/layouts/layoutHome' }))
+router.get('/teacher/signup', csrfProtection, (req, res, next) => {
+  res.render('teacherSignup', { layout: '/layouts/layoutHome', csrfToken: req.csrfToken() })
+})
 
 // Class store page (hard coded future-feature)
 router.get('/teacher/store', (req, res, next) => res.render('store', { layout: '/layouts/layoutTeacher' }))
