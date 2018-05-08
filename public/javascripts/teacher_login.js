@@ -28,7 +28,7 @@ $(function () {
 
   $('body').on('click', '#js-teacher-logout', e => {
     $.post('/api/teacher/logout')
-      .then(() => window.location.replace('/'))
+      .then(res => window.location.replace(res.redirectPath))
       .catch(err => console.error(`logout error`, err))
   })
 })
