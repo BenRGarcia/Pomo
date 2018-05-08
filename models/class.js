@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Class.associate = (models) => {
     Class.belongsTo(models.User, { foreignKey: { allowNull: false } })
-    Class.hasMany(models.Student, { foreignKey: { allowNull: false } })
+    Class.hasMany(models.Student, { foreignKey: { allowNull: true } })
   }
 
   return Class

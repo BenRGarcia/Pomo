@@ -3,12 +3,16 @@ $(function () {
   var classUUID
   var className
 
+  /**
+   * Teacher deletes a new class
+   */
+
   // Teacher clicks icon to delete a class
   $('body').on('click', 'button[data-delete=class]', e => {
     // Define data for class to delete
     classUUID = $(e.target).data('id')
     className = $(e.target).data('name')
-    // Show modal
+    // Show modal that can delete a class
     $('#js-modal-delete-class').modal('show')
   })
 
@@ -23,7 +27,7 @@ $(function () {
   })
 
   // Teacher reconfirms deletion of class by typing out class name
-  $('#js-modal-delete-class').on('keyup', e => {
+  $('#js-modal-delete-class').on('keyup', () => {
     var userInput = $('#js-modal-delete-input').val()
     // If class name input matches name of class to delete ...
     if (userInput === className) {
@@ -43,18 +47,29 @@ $(function () {
       $.ajax(`/api/teacher/class/${classUUID}`, { type: 'DELETE' })
         .then(() => window.location.reload())
         .catch(() => window.location.reload())
-    }
+    } else { /* ... do nothing */ }
   })
 
-  // Teacher wants to add a class
-  $('body').on('click', '.add-class', e => {
-    $('#js-modal-add-class').modal('show') // has form input and submit button
-    var userInput = $('#js-modal-add-class-input').val()
-    $('#js-modal-add-class').on('submit', 'form', e => {
-      e.preventDefault()
-      $.post('/api/class/', () => {
-        window.location.reload()
-      })
-    })
+  /**
+   * Teacher creates a new class
+   */
+
+  // Teacher clicks button to add a class
+  $('body').on('click', '#js-teacher-class-add', e => {
+    $('#js-modal-add-class').modal('show')
+  })
+
+  // Teacher submits modal form with new class name
+  $('body').on('submit', '#js-form-class-add', e => {
+    e.preventDefault()
+    var name = $('#js-modal-class-add-name').val()
+    $.post('/api/teacher/class/add', { name })
+      .then(() => window.location.reload())
+      .catch(() => window.location.reload())
+  })
+
+  // Clear modal's input box if modal closed
+  $('#js-modal-add-class').on('hidden.bs.modal', () => {
+    $('#js-modal-class-add-name').val('')
   })
 })
