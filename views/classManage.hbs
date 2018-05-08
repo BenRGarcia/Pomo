@@ -6,33 +6,60 @@ Here is the page where the teacher will be able to:
   4) See time remaining for each student
   4) Award coins to each student
 --}}
-
+{{!-- Dummy Section to show variables --}}
 <thead>
   <tr>
-    <th class="checkbox"><label><input type="checkbox" value="" id='js-select-all'>Select All</label></th>
+{{!--     <th class="checkbox"><label><input type="checkbox" value="" id='js-select-all'>Select All</label></th>
     <th>Student Name</th>
     <th>Coin Count/Edit</th>
     <th>Time Remaining</th>
-    <th>Finished Task(s)</th>       
+    <th>Finished Task(s)</th>       --}} 
   </tr>
 </thead>
 <tbody>
-  {{#each Student}}
-    <tr>
+  {{#each students}}
+  {{!-- Variable legend --}}
+    <div>
+      <p>students.uuid: {{uuid}}</p>
+      <p>students.name: {{name}}</p>
+      <p>students.coin_count: {{coin_count}}</p>
+      <p>students.class_uuid: {{class_uuid}}</p>
+      <h3>tasks:</h3>
+      <ul>
+        {{#each Tasks}}
+          <li style="color: black;">
+            task.uuid: {{this.uuid}}
+            task.name: {{this.name}}
+            task.timer_duration: {{this.timer_duration}}
+            task.start_time: {{this.start_time}}
+            task.is_done: {{this.is_done}}
+            task.coin_value: {{this.coin_value}}
+            task.student_uuid: {{this.student_uuid}}
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+{{!--     <tr>
       <td class="checkbox"><label><input type="checkbox" value="" data-add='student' id='js-select-all'></label></td>
       <td>{{name}}</td>
       <td contenteditable='true'>{{coin_count}}</td>
-      {{!-- NEED TO WRITE JS TO CALCULATE TIME REMAINING --}}
+
       <td>{{timeRemaining}}</td>
-      <td>{{#if isDone}}
-            <span class="glyphicon">&#xe013;</span>
-          {{/if}}  
+      <td>
+        {{#if isDone}}
+          <span class="glyphicon">&#xe013;</span>
+        {{/if}}  
       </td>
-    </tr>
+    </tr> --}}
   {{/each}}
 </tbody>
 
 {{!-- this button will toggle modal to add tasks --}}
-<span>
+{{!-- <span>
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#js-modal-task-assignment" data-delete="class">ADD TASKS</button>  
-</span>
+</span> --}}
+
+{{!-- this button will toggle the modal to delete student --}}
+{{!-- <span>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#js-delete-student" data-delete="class"></button>
+</span> --}}
