@@ -1,22 +1,37 @@
-{{!-- 
-Here is the page where the teacher will be able to:
-  1) Click a button which will link to the classEdit.hbs page
-  2) See a list of classes which link to the classManage.hbs page
-  3) Have a button that can delete a class (with modal delete verification)
---}}
-<title>{{title}}</title>
-{{!-- NOT SURE HOW TO ACCESS USER INFO AND/OR MULTIPLE TABLES! --}}
-{{#if class}}
-  {{#each class}}
-    <a href='{{> classManage}}'>
+<h1>
+  Teacher Dashboard
+</h1>
+<div>
+  Click
+  <a href='' class="add-class">
+    HERE
+  </a>
+  to add a new class
+</div>
+{{#if classes}}
+  {{#each classes}}
       <div class="card">
-        <div class="card-body">
-          {{name}}  
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#js-delete-class" data-delete="class"><span class="glyphicon">&#xe020;</span></button>  
-        </div>
+        <a href='/teacher/'>
+          <div class="card-body">
+            {{name}}    
+          </div>
+        </a>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-toggle="modal"
+          data-target="#js-delete-class"
+          data-delete="class"
+          data-id="{{uuid}}"
+          data-name="{{name}}"
+          class="glyphicon"
+        >
+          &#xe020; 
+          Delete
+        </button>
       </div>
-    </a>
   {{/each}}
 {{/if}}
 
-<p>Click <a href='{{>classEdit}}'>HERE</a> to add a new class</p>
+{{>modalDeleteClass this}}
+{{>modalAddClass}}
