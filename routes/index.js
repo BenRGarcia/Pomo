@@ -33,16 +33,10 @@ router.get('/teacher/store', (req, res, next) => res.render('store', { layout: '
  */
 
 // Teacher dashboard page
-router.get('/teacher/dashboard', /* isAuthenticated, */(req, res, next) => {
-  res.render('teacherDashboard', { layout: '/layouts/layoutTeacher' })
-  // // Davis - how do we query the DB for all the teacher's classes?
-  // db.User.find({
-  //   where: { uuid: req.uuid },
-  //   include: { model: db.Class }
-  // })
-  //   .then(resp => res.json(resp))
-  //   // .then(resp => res.render('teacherDashboard', { resp, layout: '/layouts/layoutTeacher' }))
-  //   .catch(err => res.json(err))
+router.get('/teacher/dashboard', isAuthenticated, (req, res, next) => {
+  db.Class.findAll({ where: { user_uuid: req.uuid } })
+    .then(classes => res.render('teacherDashboard', { classes, layout: '/layouts/layoutTeacher' }))
+    .catch(err => res.json(err))
 })
 
 // Teacher edits a class page (add/delete students in the class)
