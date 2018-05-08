@@ -39,10 +39,13 @@ $(function () {
 
  */
 
-  $('body').on('click', 'div[data-delete=class]', e => {
+  $('body').on('click', 'button[data-delete=class]', e => {
     // get the name of the class to insert into modal
-    var class_uuid = $(e.target).data('class_uuid') // class_uuid: adfgdfg-45465u-sfgb
-    var class_name = $(e.target).data('class_name') // '4rd Period Math Class'
+    var class_uuid = $(e.target).data('id') // class_uuid: adfgdfg-45465u-sfgb
+    var class_name = $(e.target).data('name') // '4rd Period Math Class'
+
+    console.log('NAME' + class_name)
+    console.log('UUID' + class_uuid)
 
     $('#js-modal-delete-class').modal('show') // has form input and submit button
 
@@ -56,11 +59,10 @@ $(function () {
 
     $('#js-modal-delete-class').on('submit', 'form', e => {
       e.preventDefault()
-      $.ajax('/api/class/' + class_uuid, {
+      $.ajax('/api/teacher/class/' + class_uuid, {
         type: 'DELETE'
       }).then(
         function () {
-          console.log('deleted class', class_uuid)
           window.location.reload()
         }
       )
