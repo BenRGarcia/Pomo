@@ -25,4 +25,10 @@ $(function () {
         window.alert(err.statusText)
       })
   })
+
+  $('body').on('click', '#js-teacher-logout', e => {
+    $.post('/api/teacher/logout')
+      .then(() => window.location.replace('/'))
+      .catch(err => console.error(`logout error`, err))
+  })
 })
