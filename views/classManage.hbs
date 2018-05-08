@@ -6,7 +6,6 @@ Here is the page where the teacher will be able to:
   4) See time remaining for each student
   4) Award coins to each student
 --}}
-
 <thead>
   <tr>
     <th class="checkbox"><label><input type="checkbox" value="" id='js-select-all'>Select All</label></th>
@@ -35,4 +34,9 @@ Here is the page where the teacher will be able to:
 {{!-- this button will toggle modal to add tasks --}}
 <span>
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#js-modal-task-assignment" data-delete="class">ADD TASKS</button>  
+</span>
+
+{{!-- this button will toggle the modal to delete student --}}
+<span>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#js-delete-student" data-delete="class"></button>
 </span>
