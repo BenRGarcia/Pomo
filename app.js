@@ -19,7 +19,7 @@ var indexRouter = require('./routes/index')
 var teacherRouter = require('./routes/dashboard.js')
 var studentRouter = require('./routes/student.js')
 // Additional .hbs setup required before using csurf
-// var csurf = require('csurf')
+// var csrf = require('csurf')
 // var csrfProtection = csrf({ cookie: true })
 var app = express()
 

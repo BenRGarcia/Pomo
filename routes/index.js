@@ -2,6 +2,8 @@ var express = require('express')
 var router = express.Router()
 var db = require('../models')
 var isAuthenticated = require('./utils/isAuthenticated.js')
+var csrf = require('csurf')
+var csrfProtection = csrf({ cookie: true })
 
 /***************
  * HTML Routes *
