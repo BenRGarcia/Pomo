@@ -8,7 +8,6 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, don
       if (!user || !user.validPassword(password)) {
         return done(null, false, { msg: 'Incorrect email/password combination.' })
       }
-      // After authentication, remove sensitive info from user object
       var uuid = user.dataValues.uuid
       user.dataValues.email = null
       user.dataValues.password = null
