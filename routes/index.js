@@ -20,10 +20,10 @@ router.get('/', (req, res, next) => res.render('index', { layout: '/layouts/layo
 router.get('/student/login', (req, res, next) => res.render('studentLogin', { layout: '/layouts/layoutStudent' }))
 
 // Teacher log in page
-router.get('/teacher/login', (req, res, next) => res.render('teacherLogin', { layout: '/layouts/layoutTeacher' }))
+router.get('/teacher/login', (req, res, next) => res.render('teacherLogin', { layout: '/layouts/layoutHome' }))
 
 // Teacher sign up page
-router.get('/teacher/signup', (req, res, next) => res.render('teacherSignup', { layout: '/layouts/layoutTeacher' }))
+router.get('/teacher/signup', (req, res, next) => res.render('teacherSignup', { layout: '/layouts/layoutHome' }))
 
 // Class store page (hard coded future-feature)
 router.get('/teacher/store', (req, res, next) => res.render('store', { layout: '/layouts/layoutTeacher' }))
