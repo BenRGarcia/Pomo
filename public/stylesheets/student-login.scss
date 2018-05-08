@@ -1,4 +1,4 @@
-h1 {
+.student-login-title {
     /* POMO: */
     padding-top: 10%;
     font-family: Skranji;
@@ -8,24 +8,21 @@ h1 {
     text-align: center;
 }
 
-h2 {
+.student-login-login {
     padding-top: 30%;
+    margin-left: 8%;
     font-family: Skranji;
     color: #754215;
     text-align: left;
 }
 
-body {
-    background: #9ABF17;
-}
-
-form {
+.student-login-form {
     margin-top: 10%;
 }
 
-#wood-panel { 
+#login-wood-panel { 
     margin-top: 10%;
-    background-image: url("../images/Slice.png");
+    background-image: url("/images/Slice.png");
     background-repeat: no-repeat;
     background-position: center;
     max-width: 440px;
@@ -46,7 +43,7 @@ form {
     box-shadow: 3px 6px 11px 0 #754215;
     border-radius: 30px;
     /* Sign in-bottom: */
-    font-family: Skranji-Bold;
+    font-family: Skranji-regular;
     font-size: 36px;
     color: #FFFFFF;
     letter-spacing: 0;
@@ -55,7 +52,7 @@ form {
     height: 59px;
 }
 
-.label-bg {
+.student-label-bg {
     /* Login-Input: */
     background: #F2C37A;
     box-shadow: inset 0 1px 6px 0 #754215;
