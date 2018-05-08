@@ -25,7 +25,7 @@ var app = express()
 
 app.use(helmet())
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
-
+app.use(express.static(path.join(__dirname, 'public')))
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'hbs')
 hbs.registerPartials(path.join(__dirname, '/views/partials'))
@@ -42,7 +42,7 @@ app.use(sassMiddleware(sassConfig))
 var limiter = require('express-limiter')(app, client)
 limiter(limiterConfig)
 
-app.use(express.static(path.join(__dirname, 'public')))
+// app.use(express.static(path.join(__dirname, 'public')))
 app.use('/', indexRouter)
 app.use('/api/teacher', teacherRouter)
 app.use('/api/students', studentRouter)
