@@ -37,11 +37,13 @@ $(function () {
 
   // Teacher submits confirmed deletion of class
   $('body').on('submit', '#js-modal-delete-form', e => {
-    console.log(`Teacher just submitted modal form to delete a class`)
     e.preventDefault()
-    $.ajax(`/api/teacher/class/${classUUID}`, { type: 'DELETE' })
-      .then(() => window.location.reload())
-      .catch(() => window.location.reload())
+    // Ignore form submission if delete button disabled
+    if ($('#js-modal-delete-button').prop('disabled') === false) {
+      $.ajax(`/api/teacher/class/${classUUID}`, { type: 'DELETE' })
+        .then(() => window.location.reload())
+        .catch(() => window.location.reload())
+    }
   })
 
   // Teacher wants to add a class
