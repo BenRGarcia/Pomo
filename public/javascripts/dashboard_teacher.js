@@ -1,87 +1,58 @@
 $(function () {
-  /**
-   * Handle when teacher deletes a class
-   */
+  // Define global variables
+  var classUUID
+  var className
 
-/*
-
-  Psuedocode:
-
-  1) Teacher clicks on the trash can button
-  2) Modal should pop up, confirm if the teacher realllllly wants to delete the class
-  3) Modal should have a form and a button in it
-    * Form should require that the teacher type in the name of the class she wants to delete
-    * and Modal's 'delete' button should be inactive unless the form input matches the class' name
-  4) Then and only then will the frontend send a delete request to the backend
-
-  <modal id="js-delete-class">
-  </modal>
-
-  <div>
-    3rd Period Math Class
-    <span class="fa" data-delete="class" data-class="4">trashcan</span>
-  </div>
-  <div>
-    4rd Period Math Class
-    <span class="fa" data-delete="class" data-class-name="" data-class-uuid="4">trashcan</span>
-  </div>
-
-  .hbs
-
-  {{#each }}
-    <div>
-      {{ class_name }}
-      <span class="fa" data-delete="class" data-class-name="{{ class_name }}" data-class-uuid="{{ class_uuid }}">
-        trashcan
-      </span>
-    </div>
-  {{/each }}
-
- */
-
+  // Teacher clicks icon to delete a class
   $('body').on('click', 'button[data-delete=class]', e => {
-    // get the name of the class to insert into modal
-    var class_uuid = $(e.target).data('id') // class_uuid: adfgdfg-45465u-sfgb
-    var class_name = $(e.target).data('name') // '4rd Period Math Class'
-
-    console.log('NAME' + class_name)
-    console.log('UUID' + class_uuid)
-
-    $('#js-modal-delete-class').modal('show') // has form input and submit button
-
-    var userInput = $('#js-modal-delete-input').val()
-
-    if (userInput === class_name) {
-      $('#js-modal-delete-class').prop('disabled', false)
-    } else {
-      $('#js-modal-delete-class').prop('disabled', true)
-    }
-
-    $('#js-modal-delete-class').on('submit', 'form', e => {
-      e.preventDefault()
-      $.ajax('/api/teacher/class/' + class_uuid, {
-        type: 'DELETE'
-      }).then(
-        function () {
-          window.location.reload()
-        }
-      )
-    })
+    // Define data for class to delete
+    classUUID = $(e.target).data('id')
+    className = $(e.target).data('name')
+    // Show modal
+    $('#js-modal-delete-class').modal('show')
   })
 
+  // Trigger focus to input box on modal when shown
+  $('#js-modal-delete-class').on('shown.bs.modal', () => {
+    $('#js-modal-delete-input').trigger('focus')
+  })
+
+  // Clear modal's input box if modal closed
+  $('#js-modal-delete-class').on('hidden.bs.modal', () => {
+    $('#js-modal-delete-input').val('')
+  })
+
+  // Teacher reconfirms deletion of class by typing out class name
+  $('#js-modal-delete-class').on('keyup', e => {
+    var userInput = $('#js-modal-delete-input').val()
+    // If class name input matches name of class to delete ...
+    if (userInput === className) {
+      // ... remove disabled attribute of submit button
+      $('#js-modal-delete-button').prop('disabled', false)
+    } else {
+      // ... or disable button because name doesn't match
+      $('#js-modal-delete-button').prop('disabled', true)
+    }
+  })
+
+  // Teacher submits confirmed deletion of class
+  $('body').on('submit', '#js-modal-delete-form', e => {
+    console.log(`Teacher just submitted modal form to delete a class`)
+    e.preventDefault()
+    $.ajax(`/api/teacher/class/${classUUID}`, { type: 'DELETE' })
+      .then(() => window.location.reload())
+      .catch(() => window.location.reload())
+  })
+
+  // Teacher wants to add a class
   $('body').on('click', '.add-class', e => {
     $('#js-modal-add-class').modal('show') // has form input and submit button
-
     var userInput = $('#js-modal-add-class-input').val()
-
     $('#js-modal-add-class').on('submit', 'form', e => {
       e.preventDefault()
-      $.post('/api/class/',
-        function () {
-          console.log('class added', userInput)
-          window.location.reload()
-        }
-      )
+      $.post('/api/class/', () => {
+        window.location.reload()
+      })
     })
   })
 })
