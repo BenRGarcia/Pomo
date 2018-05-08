@@ -62,7 +62,7 @@ router.route('/:uuid/class/new')
 // For when teacher creates a new class
 router.route('/:uuidTeacher/class/:uuidClass')
   .post((req, res, next) => {
-    var updatedClass = { class: req.body.class }
+    // var updatedClass = { class: req.body.class }
     // DB query
     // then(() => {res.status(204).send()})
   })
