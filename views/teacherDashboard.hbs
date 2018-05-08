@@ -3,9 +3,11 @@
 </h1>
 <div>
   Click
-  <a href='' class="add-class">
+  <button
+    id="js-teacher-class-add"
+  >
     HERE
-  </a>
+  </button>
   to add a new class
 </div>
 {{#if classes}}
@@ -33,5 +35,5 @@
   {{/each}}
 {{/if}}
 
-{{>modalDeleteClass this}}
+{{>modalDeleteClass}}
 {{>modalAddClass}}
