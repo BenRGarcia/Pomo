@@ -39,7 +39,7 @@ $(function () {
 
  */
 
-  $('body').on('click', 'span[data-delete=class]', e => {
+  $('body').on('click', 'div[data-delete=class]', e => {
     // get the name of the class to insert into modal
     var class_uuid = $(e.target).data('class_uuid') // class_uuid: adfgdfg-45465u-sfgb
     var class_name = $(e.target).data('class_name') // '4rd Period Math Class'
