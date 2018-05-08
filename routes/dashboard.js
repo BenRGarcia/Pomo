@@ -34,18 +34,11 @@ router.route('/logout')
   })
 
 // This path is for the teacher to see their dashboard list of classes and be able to delete a class
-router.route('/dashboard')
-  // Teacher wants to see the list of classes
-  .get((req, res, next) => {
-    // Database query to return array of classes
-    db.User.findAll({ where: { uuid: req.uuid }, include: [db.Class] })
-      // Send json object to frontend
-      .then(resp => res.json(resp))
-  })
+router.route('/class/:uuid')
   // DELETE requests for this path
   .delete((req, res, next) => {
-    db.Class.destroy({ where: { id: req.body.id } })
-      .then(dbClass => res.json(dbClass))
+    db.Class.destroy({ where: { uuid: req.params.uuid } })
+      .then(() => res.status(204).send())
       .catch(err => console.error(err))
   })
 
