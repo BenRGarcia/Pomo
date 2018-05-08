@@ -14,7 +14,7 @@ var isAuthenticated = require('./utils/isAuthenticated.js')
  */
 
 // Home page
-router.get('/', (req, res, next) => res.render('index', { layout: '/layouts/layoutTeacher' }))
+router.get('/', (req, res, next) => res.render('index', { layout: '/layouts/layoutHome' }))
 
 // Student login page
 router.get('/student/login', (req, res, next) => res.render('studentLogin', { layout: '/layouts/layoutStudent' }))
