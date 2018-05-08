@@ -1,0 +1,120 @@
+.student-task-link {
+    /* Task: */
+    font-family: Skranji;
+    font-size: 36px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    text-align: center;
+    padding-left: 10%;
+}
+
+.student-task-link:hover {
+    color: #FFF89D;
+}
+
+.student-store-link {
+    /* Task: */
+    font-family: Skranji;
+    font-size: 36px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    text-align: center;
+    padding-left: 10%;
+}
+
+.student-store-link:hover {
+    color: #FFF89D;
+}
+
+.student-dashboard-dash {
+    margin-top: 12%;
+}
+
+.student-dashboard-left {
+    /* Rectangle Copy 2: */
+    background: #9ABF17;
+    border: 5px solid #6F8C0F;
+    box-shadow: 21px 18px 5px 11px #8BB013;
+    width: 425px;
+    max-width: 100%;
+    height: 635px;
+    max-height: 100%;
+    margin-left: 10%
+}
+
+.focus-time {
+    /* Time to focus!: */
+    font-family: Roboto-Medium;
+    font-size: 36px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    text-align: center;
+}
+
+.student-dash-timer {
+    /* 25:00: */
+    font-family: Roboto-Light;
+    font-size: 64px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    text-align: center;
+    padding-top: 10%;
+}
+
+.coins-img {
+    margin-left: 15%;
+    padding-top: 15%;
+}
+
+.timer-start-btn {
+    background-image: linear-gradient(-180deg, #FEEE64 0%, #E68F09 96%);
+    box-shadow: 3px 6px 11px 0 #6F8C0F;
+    border-radius: 30px;
+    font-family: Skranji;
+    font-size: 36px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    text-align: center;
+    width: 190px;
+    height: 50px;
+    margin-left: 25%;
+    margin-top: 10%;
+}
+
+.student-dashboard-right {
+    /* Login-Card Copy 3: */
+    background-image: url("/images/student-dash-slice.png");
+    background-repeat: no-repeat;
+    border: 6px solid #754215;
+    box-shadow: 21px 18px 5px 11px #8BB013;
+    width: 425px;
+    max-width: 100%;
+    height: 635px;
+    max-height: 100%;
+}
+
+.task-title {
+    /* Task: */
+    font-family: Skranji;
+    font-size: 48px;
+    color: #754215;
+    letter-spacing: 0;
+    text-align: center;
+}
+
+.task-done-btn {
+    /* Rectangle: */
+    background-image: linear-gradient(-180deg, #9ABF17 0%, #8BB013 100%);
+    border: 1px solid #6F8C0F;
+    box-shadow: 3px 6px 11px 0 #754215;
+    border-radius: 30px;
+    font-family: Skranji;
+    font-size: 36px;
+    color: #FFFFFF;
+    letter-spacing: 0;
+    text-align: center;
+    width: 190px;
+    height: 50px;
+    margin-left: 25%;
+    margin-top: 10%;
+}

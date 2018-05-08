@@ -16,11 +16,7 @@
     text-align: left;
 }
 
-body {
-    background: #9ABF17;
-}
-
-form {
+.student-login-form {
     margin-top: 10%;
 }
 
@@ -47,7 +43,7 @@ form {
     box-shadow: 3px 6px 11px 0 #754215;
     border-radius: 30px;
     /* Sign in-bottom: */
-    font-family: Skranji-Bold;
+    font-family: Skranji-regular;
     font-size: 36px;
     color: #FFFFFF;
     letter-spacing: 0;
