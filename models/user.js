@@ -26,8 +26,7 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.Class, { foreignKey: { allowNull: false } })
   }
 
-  // Function Expression used to keep lexical value of 'this' bound to created 'User' object
-  User.prototype.validPassword = password => {
+  User.prototype.validPassword = function (password) {
     return bcrypt.compareSync(password, this.password)
   }
 
