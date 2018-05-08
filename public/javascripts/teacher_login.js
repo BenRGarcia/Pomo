@@ -1,8 +1,5 @@
-// Wait until page loads
+
 $(function () {
-  /**
-   * When user submits login/signup form
-   */
   $('body').on('submit', '#js-form-signup-or-login', e => {
     console.log(`teacher login/signup was just submitted`)
     // Prevent default reloading of page
@@ -27,9 +24,6 @@ $(function () {
       console.log(`else condition executed`)
       path = '/api/teacher/login'
     }
-    console.log(`\n================\n`)
-    console.log(path)
-    console.log(`================\n`)
     // Send post request
     $.post(path, user)
       .then(res => {
@@ -37,9 +31,6 @@ $(function () {
           window.location.replace(res.redirectPath)
         } else {
           window.alert('incorrect username/password combination')
-          // somehow alert user "Incorrect email/password combination"
-          // $('#alert-div').addClass('text-red')
-          // $('#alert-div').text('Incorrect email/password combination')
         }
       })
       .catch(err => console.error(err.message))
