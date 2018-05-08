@@ -24,6 +24,10 @@ router.route('/signup')
       .catch((err) => res.status(422).json(err.errors[0].message))
   })
 
+/*************************************************************
+ * All below routes require `isAuthenticated` middleware!!!! *
+ *************************************************************/
+
 router.route('/logout')
   .post(isAuthenticated, (req, res, next) => {
     // passport
@@ -40,31 +44,20 @@ router.route('/logout')
       .send({ redirectPath: '/' })
   })
 
-// This path is for the teacher to see their dashboard list of classes and be able to delete a class
+// Teacher can DELETE a class
 router.route('/class/:uuid')
-  // DELETE requests for this path
-  .delete((req, res, next) => {
+  .delete(/* isAuthenticated, */ (req, res, next) => {
     db.Class.destroy({ where: { uuid: req.params.uuid } })
       .then(() => res.status(204).send())
       .catch(err => console.error(err))
   })
 
-// For when teacher creates a new class
-router.route('/:uuid/class/new')
-  .post((req, res, next) => {
-    var className = { name: req.body.class_name }
-    // need to add associate in this query
-    db.Class.create({ className })
+// Teacher can ADD a new class
+router.route('/class/add')
+  .post(isAuthenticated, (req, res, next) => {
+    db.Class.create({ name: req.body.name, user_uuid: req.uuid })
       .then(() => res.status(201).send())
       .catch(err => console.error(err))
-  })
-
-// For when teacher creates a new class
-router.route('/:uuidTeacher/class/:uuidClass')
-  .post((req, res, next) => {
-    // var updatedClass = { class: req.body.class }
-    // DB query
-    // then(() => {res.status(204).send()})
   })
 
 // For when a teacher adds students to the class (student name, )
