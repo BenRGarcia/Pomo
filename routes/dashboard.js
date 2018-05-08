@@ -26,11 +26,18 @@ router.route('/signup')
 
 router.route('/logout')
   .post(isAuthenticated, (req, res, next) => {
-    // Passport.js method to end user session
+    // passport
     req.logout()
-    // express-session method to destroy session in redis
+    // express-session/redis
     req.session.destroy(err => console.error(err))
-    res.json('/')
+    // client side
+    res
+      .clearCookie('sessionId', {
+        httpOnly: true,
+        sameSite: true,
+        secure: false
+      })
+      .send({ redirectPath: '/' })
   })
 
 // This path is for the teacher to see their dashboard list of classes and be able to delete a class
