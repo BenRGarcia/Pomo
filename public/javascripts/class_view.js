@@ -1,12 +1,10 @@
-import { CONNREFUSED } from 'dns'
-
 $(function () {
 /**
  * Handle when teacher is viewing class
  */
 
   // grab selected students and assign task, time duration, and coin value
-  $('body').on('submit', '#', e => {
+  $('body').on('submit', e => {
     e.preventDefault()
     // get the ids of the students
     var studentArr = []
@@ -93,7 +91,7 @@ $(function () {
       e.preventDefault()
 
       var newStudentName = $('#new_student').val().trim()
-      var coin_count = $('#coint_count').val().trim()
+      var coin_count = $('#coin_count').val().trim()
 
       var addNewStudent = {
         name: newStudentName,

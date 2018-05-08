@@ -2,7 +2,7 @@
 on deleting a class with all related data. The user will be required to type in the name of the class they wish to delete.
 If, and only if, the name of the class matches the class 'delete' button which was clicked will that class actually be deleted.
 --}}
-<div class="modal fade" id="js-delete-class" tabindex="-1" role="dialog" aria-labelledby="delete-class" aria-hidden="true">
+<div class="modal fade" id="js-modal-delete-class" tabindex="-1" role="dialog" aria-labelledby="delete-class" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -13,12 +13,11 @@ If, and only if, the name of the class matches the class 'delete' button which w
       </div>
       <div class="modal-body">
         <form>
-          <p>This action cannot be undone. This will permanently delete {{class.name}} class.</p>
-          <br>
+          <p>This action cannot be undone. This will permanently delete {{../name}} class.</p>
           <p>Please type in the name of the class to confirm.</p>
           <div class="form-group">
             <label for="js-modal-delete-input" class="col-form-label">Class:</label>
-            <textarea class="form-control" id="js-modal-delete-input"></textarea>
+            <input class="form-control" id="js-modal-delete-input"></input>
           </div>
         </form>
       </div>

@@ -39,28 +39,46 @@ $(function () {
 
  */
 
-  $('body').on('click', 'span[data-delete=class]', e => {
+  $('body').on('click', 'button[data-delete=class]', e => {
     // get the name of the class to insert into modal
-    var class_uuid = $(e.target).data('class_uuid') // class_uuid: adfgdfg-45465u-sfgb
-    var class_name = $(e.target).data('class_name') // '4rd Period Math Class'
+    var class_uuid = $(e.target).data('id') // class_uuid: adfgdfg-45465u-sfgb
+    var class_name = $(e.target).data('name') // '4rd Period Math Class'
+
+    console.log('NAME' + class_name)
+    console.log('UUID' + class_uuid)
 
     $('#js-modal-delete-class').modal('show') // has form input and submit button
 
     var userInput = $('#js-modal-delete-input').val()
-    
+
     if (userInput === class_name) {
       $('#js-modal-delete-class').prop('disabled', false)
     } else {
-      $('#js-modal-delete-class').prop('disabled', true)      
+      $('#js-modal-delete-class').prop('disabled', true)
     }
-      
+
     $('#js-modal-delete-class').on('submit', 'form', e => {
       e.preventDefault()
-        $.ajax('/api/class/' + class_uuid, {
-          type: 'DELETE'
-        }).then(
+      $.ajax('/api/teacher/class/' + class_uuid, {
+        type: 'DELETE'
+      }).then(
         function () {
-          console.log('deleted class', class_uuid)
+          window.location.reload()
+        }
+      )
+    })
+  })
+
+  $('body').on('click', '.add-class', e => {
+    $('#js-modal-add-class').modal('show') // has form input and submit button
+
+    var userInput = $('#js-modal-add-class-input').val()
+
+    $('#js-modal-add-class').on('submit', 'form', e => {
+      e.preventDefault()
+      $.post('/api/class/',
+        function () {
+          console.log('class added', userInput)
           window.location.reload()
         }
       )

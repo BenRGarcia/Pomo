@@ -3,7 +3,6 @@ var router = express.Router()
 var db = require('../models')
 var passport = require('../config/passport.js')
 var isAuthenticated = require('./utils/isAuthenticated.js')
-
 /**
  * Discover API path '/api/teacher'
  *   - To access teacher's UUID: `req.uuid`
@@ -12,7 +11,10 @@ var isAuthenticated = require('./utils/isAuthenticated.js')
 
 router.route('/login')
   .post(passport.authenticate('local'), (req, res, next) => {
-    res.json('/teacher/dashboard')
+    res.json({
+      isAuthenticated: true,
+      redirectPath: '/teacher/dashboard'
+    })
   })
 
 router.route('/signup')
@@ -32,18 +34,11 @@ router.route('/logout')
   })
 
 // This path is for the teacher to see their dashboard list of classes and be able to delete a class
-router.route('/dashboard')
-  // Teacher wants to see the list of classes
-  .get((req, res, next) => {
-    // Database query to return array of classes
-    db.User.findAll({ where: { uuid: req.params.uuid }, include: [db.Class] })
-      // Send json object to frontend
-      .then(resp => res.json(resp))
-  })
+router.route('/class/:uuid')
   // DELETE requests for this path
   .delete((req, res, next) => {
-    db.Class.destroy({ where: { id: req.body.id } })
-      .then(dbClass => res.json(dbClass))
+    db.Class.destroy({ where: { uuid: req.params.uuid } })
+      .then(() => res.status(204).send())
       .catch(err => console.error(err))
   })
 
