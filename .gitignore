@@ -1,5 +1,5 @@
 # Redis
-*.rdb
+dump.rdb
 
 # Logs
 logs
