@@ -2,6 +2,8 @@ var express = require('express')
 var router = express.Router()
 var db = require('../models')
 var isAuthenticated = require('./utils/isAuthenticated.js')
+var csrf = require('csurf')
+var csrfProtection = csrf()
 
 /***************
  * HTML Routes *
@@ -20,10 +22,14 @@ router.get('/', (req, res, next) => res.render('index', { layout: '/layouts/layo
 router.get('/student/login', (req, res, next) => res.render('studentLogin', { layout: '/layouts/layoutStudent' }))
 
 // Teacher log in page
-router.get('/teacher/login', (req, res, next) => res.render('teacherLogin', { layout: '/layouts/layoutHome' }))
+router.get('/teacher/login', csrfProtection, (req, res, next) => {
+  res.render('teacherLogin', { layout: '/layouts/layoutHome', csrfToken: req.csrfToken() })
+})
 
 // Teacher sign up page
-router.get('/teacher/signup', (req, res, next) => res.render('teacherSignup', { layout: '/layouts/layoutHome' }))
+router.get('/teacher/signup', csrfProtection, (req, res, next) => {
+  res.render('teacherSignup', { layout: '/layouts/layoutHome', csrfToken: req.csrfToken() })
+})
 
 // Class store page (hard coded future-feature)
 router.get('/teacher/store', (req, res, next) => res.render('store', { layout: '/layouts/layoutTeacher' }))
@@ -39,44 +45,19 @@ router.get('/teacher/dashboard', isAuthenticated, (req, res, next) => {
     .catch(err => res.json(err))
 })
 
-// Teacher edits a class page (add/delete students in the class)
-router.get('/teacher/class/:uuid/edit', /* isAuthenticated, */(req, res, next) => {
-  res.render('classEdit', { layout: '/layouts/layoutTeacher' })
-  // // Davis - how do we query the DB for all students in a teacher's individual class?
-  // db.User.find({
-  //   where: { uuid: req.uuid },
-  //   include: {
-  //     model: db.Class,
-  //     where: { uuid: req.params.uuid },
-  //     include: {
-  //       model: db.Student,
-  //       where: { class_uuid: req.params.uuid }
-  //     }
-  //   }
-  // })
-  //   .then(resp => res.json(resp))
-  //   // .then(resp => res.render('classEdit', { resp, layout: '/layouts/layoutTeacher' }))
-  //   .catch(err => res.json(err))
-})
-
 // Teacher sets tasks, times to students (day to day stuff)
-router.get('/teacher/class/:uuid', /* isAuthenticated, */(req, res, next) => {
-  res.render('classManage', { layout: '/layouts/layoutTeacher' })
-  // // Davis - how do we query the DB for all students in a teacher's individual class?
-  // db.User.find({
-  //   where: { uuid: req.uuid },
-  //   include: {
-  //     model: db.Class,
-  //     where: { uuid: req.params.uuid },
-  //     include: {
-  //       model: db.Student,
-  //       where: { class_uuid: req.params.uuid }
-  //     }
-  //   }
-  // })
-  //   .then(resp => res.json(resp))
-  //   // .then(resp => res.render('classManage', { resp, layout: '/layouts/layoutTeacher' }))
-  //   .catch(err => res.json(err))
+router.get('/teacher/class/:uuid/manage', /* isAuthenticated, */(req, res, next) => {
+  var class_uuid = req.params.uuid
+  db.Student.findAll({
+    where: { class_uuid },
+    include: [{
+      model: db.Task,
+      where: { is_done: false },
+      required: false
+    }]
+  })
+    .then(students => res.render('classManage', { students, layout: '/layouts/layoutTeacher' }))
+    .catch(err => res.json(err))
 })
 
 // Student dashboard

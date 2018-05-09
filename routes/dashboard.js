@@ -3,6 +3,9 @@ var router = express.Router()
 var db = require('../models')
 var passport = require('../config/passport.js')
 var isAuthenticated = require('./utils/isAuthenticated.js')
+var csrf = require('csurf')
+var csrfProtection = csrf()
+
 /**
  * Discover API path '/api/teacher'
  *   - To access teacher's UUID: `req.uuid`
@@ -10,7 +13,7 @@ var isAuthenticated = require('./utils/isAuthenticated.js')
  */
 
 router.route('/login')
-  .post(passport.authenticate('local'), (req, res, next) => {
+  .post(csrfProtection, passport.authenticate('local'), (req, res, next) => {
     res.json({
       isAuthenticated: true,
       redirectPath: '/teacher/dashboard'
@@ -18,7 +21,7 @@ router.route('/login')
   })
 
 router.route('/signup')
-  .post((req, res, next) => {
+  .post(csrfProtection, (req, res, next) => {
     db.User.create({ email: req.body.email, password: req.body.password })
       .then(() => res.redirect(307, '/api/teacher/login'))
       .catch((err) => res.status(422).json(err.errors[0].message))

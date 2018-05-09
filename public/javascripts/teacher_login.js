@@ -4,7 +4,7 @@ $(function () {
 
     var email = $('#js-email').val().trim()
     var password = $('#js-password').val()
-    // var _csrf = $('#_csrf').val().trim()
+    var _csrf = $('input[name=_csrf]').val()
     var user = { email, password }
 
     $('#js-email').val('')
@@ -15,7 +15,12 @@ $(function () {
     if (window.location.pathname === '/teacher/signup') path = '/api/teacher/signup'
     else if (window.location.pathname === '/teacher/login') path = '/api/teacher/login'
 
-    $.post(path, user)
+    $.ajax({
+      headers: { 'CSRF-Token': _csrf },
+      method: 'POST',
+      url: path,
+      data: user
+    })
       .then(res => {
         if (res.isAuthenticated) window.location.replace(res.redirectPath)
         else window.alert('incorrect username/password combination')
