@@ -1,3 +1,13 @@
+<div 
+  hidden 
+  aria-hidden='true' 
+  id='js-timer-raw-data'
+  data-start-time='{{start_time}}'
+  data-duration='{{timer_duration}}'
+  data-uuid='{{uuid}}'
+>
+</div>
+
 <div class="row">
   {{> studentDashboardHeader }}
 </div>
@@ -17,78 +27,27 @@ Backend will send in a `Tasks` object to .hbs that looks like this:
 
 <div class="student-dashboard-dash" id="container">
   <div class="row">
-    <div class="student-dashboard-left col-m-6">
-      <section>
-
-        <div class="focus-time">
-          Time to focus!
-        </div>
-
-        <div>
-          <img class="coins-img" src="/images/Student-Tableta.jpg" alt="Virtual coins">
-        </div>
-
-        <div class="student-dash-timer">
-          <span id="js-timer-minutes">
-          </span>
-          25:00
-          <span id="js-timer-seconds">
-          </span>
-        </div>
-
-        <button class="timer-start-btn text-align-center col-12">
-          START!
-        </button>
-      </section>
-    </div>
-
+    {{>studentTimer}}
     <section>
       <div class="student-dashboard-right col-m-6">
         <div class="task-title">
           Task
         </div>
-        
-        <ul>
-          Do your homework!
-          <li>
-            Geography.
-          </li>
-          <li>
-            History.
-          </li>
-          <li>
-            Mafs
-          </li>
-        </ul>
-
-
-        <ul>
-          Do your homework!
-          <li>
-            Geography.
-          </li>
-          <li>
-            History.
-          </li>
-          <li>
-            Mafs
-          </li>
-        </ul>
-        {{!--
-        <div class="list">
-          {{#if tasks}}
-          <ul>
-            {{#each tasks}}
-            <li>
-              {{name}}
-            </li>
-            {{/each}}
-          </ul>
-          {{/if}}
-        </div> --}}
+        {{#if name}}
+        <div id="task-name">
+          {{name}}
+        </div>
+        {{/if}}
+        {{#if description}}
+        <div id="task-description">
+          {{description}}
+        </div>
+        {{/if}}
+        {{#if Tasks}}
         <button class="task-done-btn text-align-center col-12">
           DONE!
         </button>
+        {{/if}}
       </div>
     </section>
   </div>

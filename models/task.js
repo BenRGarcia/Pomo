@@ -10,6 +10,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: { len: [1] }
     },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
     timer_duration: {
       type: DataTypes.INTEGER,
       allowNull: false
