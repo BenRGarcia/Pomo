@@ -2,6 +2,19 @@
   {{> studentDashboardHeader }}
 </div>
 
+{{!--
+Backend will send in a `Tasks` object to .hbs that looks like this:
+{
+  uuid: asdfj34afk-hfjdgj-342432, // uuid for the task
+  name: 'Math homework',
+  timer_duration: 300, // 5 minutes ( unit = seconds )
+  start_time: null, // or unix time ( ex. `1525881562712` )
+  is_done: false, // backend will intentionally not send in tasks that are already done
+  coin_value: 3,
+  student_uuid: zxcvbnm34afk-hfjdgj-342432 // uuid for the student
+}
+--}}
+
 <div class="student-dashboard-dash" id="container">
   <div class="row">
     <div class="student-dashboard-left col-m-6">
