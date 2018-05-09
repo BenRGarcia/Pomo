@@ -15,12 +15,11 @@ var logger = require('morgan')
 var sassMiddleware = require('node-sass-middleware')
 var hbs = require('hbs')
 var favicon = require('serve-favicon')
+
 var indexRouter = require('./routes/index')
 var teacherRouter = require('./routes/dashboard.js')
 var studentRouter = require('./routes/student.js')
-// Additional .hbs setup required before using csurf
-// var csrf = require('csurf')
-// var csrfProtection = csrf({ cookie: true })
+
 var app = express()
 
 app.use(helmet())
@@ -42,7 +41,6 @@ app.use(sassMiddleware(sassConfig))
 var limiter = require('express-limiter')(app, client)
 limiter(limiterConfig)
 
-// app.use(express.static(path.join(__dirname, 'public')))
 app.use('/', indexRouter)
 app.use('/api/teacher', teacherRouter)
 app.use('/api/students', studentRouter)
