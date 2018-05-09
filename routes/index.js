@@ -74,7 +74,7 @@ router.get('/student/:uuid/dashboard', (req, res, next) => {
   //   }]
   // })
   //   .then(resp => res.json(resp))
-  //   // .then(resp => res.render('studentDashboard', { resp, layout: '/layouts/layoutStudent' }))
+  //   // .then(task => res.render('studentDashboard', { task, layout: '/layouts/layoutStudent' }))
   //   .catch(err => res.json(err))
 })
 
