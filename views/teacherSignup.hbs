@@ -1,52 +1,31 @@
-<h1>Sign Up</h1>
-<form
-  id="js-form-signup-or-login"
->
-  <div 
-    class="form-group"
-  >
-    <label
-      for="js-email"
-      hidden="true"
-    >
-      Email address
-    </label>
-    <input
-      type="email"
-      class="form-control"
-      id="js-email"
-      aria-describedby="emailHelp"
-      placeholder="Email"
-      required
-    >
+<div class="container pt-5 mt-5">
+  <div class="card shadow">
+    <div class="card-header">
+      POMO LOGIN
+    </div>
+    <div class="card-body">
+      <div class="mb-4">
+        <form id="js-form-signup-or-login">
+          <div class="form-group">
+            <label for="js-email" hidden="true">
+              Email address
+            </label>
+            <input type="email" class="form-control" id="js-email" aria-describedby="emailHelp" placeholder="Email" required>
+          </div>
+          <div class="form-group">
+            <label for="js-password" hidden="true">
+              Password
+            </label>
+            <input type="password" class="form-control" id="js-password" placeholder="Password" minlength="12" maxlength="24" title="password length must be between 12 and 24 characters"
+              required>
+          </div>
+          <button type="submit" class="btn btn-outline-success">
+            Create
+          </button>
+          <input type="hidden" name="_csrf" value="{{csrfToken}}">
+        </form>
+
+      </div>
+    </div>
   </div>
-  <div class="form-group">
-    <label
-      for="js-password"
-      hidden="true"
-    >
-      Password
-    </label>
-    <input
-      type="password"
-      class="form-control"
-      id="js-password"
-      placeholder="Password"
-      minlength="12"
-      maxlength="24"
-      title="password length must be between 12 and 24 characters"
-      required
-    >
-  </div>
-  <button
-    type="submit"
-    class="btn btn-primary"
-  >
-    Create
-  </button>
-  <input
-    type="hidden"
-    name="_csrf"
-    value="{{csrfToken}}"
-  >
-</form>
+</div>
