@@ -5,8 +5,8 @@ var db = require('../models')
 // Credit coins to student
 var creditCoins = (studentUUID, coins) => {
   return new Promise((resolve, reject) => {
-    db.Student.findOne({ where: { uuid: studentUUID } })
-      .then(student => resolve(student.increment('coin_count', { by: coins })))
+    db.Student.findOne({ where: { uuid: 1 } })
+      .then(student => resolve(student.increment('coin_count', { by: 25 })))
       .catch(err => reject(err))
   })
 }
@@ -30,7 +30,7 @@ router.route('/timer/start')
     // Get task uuid from req body
     var taskUUID = req.body.taskUUID
     // Update task with start time
-    db.Task.update({ start_time: Date.now(), where: { uuid: taskUUID } })
+    db.Task.update({ start_time: Date.now() }, { where: { uuid: taskUUID } })
       .then(() => res.status(204).send())
   })
 
@@ -44,7 +44,7 @@ router.route('/timer/done')
       // Credit coins to student associated with task
       .then(task => creditCoins(task.student_UUID, task.coin_value))
       // Update task with `is_done` boolean
-      .then(() => db.Task.update({ is_done: true, where: { uuid: taskUUID } }))
+      .then(() => db.Task.update({ is_done: true }, { where: { uuid: taskUUID } }))
       // Send success response to client
       .then(() => res.status(204).send())
   })
