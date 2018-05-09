@@ -6,9 +6,7 @@ var db = require('../models')
 var creditCoins = (studentUUID, coins) => {
   return new Promise((resolve, reject) => {
     db.Student.findOne({ where: { uuid: studentUUID } })
-      .then(student => {
-        resolve(student.increment('coin_count', { by: coins }))
-      })
+      .then(student => resolve(student.increment('coin_count', { by: coins })))
       .catch(err => reject(err))
   })
 }
@@ -16,6 +14,15 @@ var creditCoins = (studentUUID, coins) => {
 /**
  * API Path '/api/task'
  */
+
+// Teacher creates new task for student
+router.route('/new')
+  // Assuming req body will be an array of task objects
+  .post((req, res, next) => {
+    // Bulk update db
+    db.Task.bulkCreate(req.body)
+      .then(() => res.status(204).send())
+  })
 
 // Student starts the timer (clicks `start` button)
 router.route('/timer/start')
