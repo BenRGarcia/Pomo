@@ -61,7 +61,7 @@ router.get('/teacher/class/:uuid/manage', /* isAuthenticated, */(req, res, next)
 })
 
 // Student dashboard
-router.get('/dashboard/student', /* add psuedo-authentication, */(req, res, next) => {
+router.get('/student/:uuid/dashboard', /* add psuedo-authentication, */(req, res, next) => {
   res.render('studentDashboard', { layout: '/layouts/layoutStudent' })
   // var uuid = req.params.uuid
   // // Davis - how do we query the DB for a student's incomplete tasks?
