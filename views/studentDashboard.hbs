@@ -43,9 +43,11 @@ Backend will send in a `Tasks` object to .hbs that looks like this:
           {{description}}
         </div>
         {{/if}}
+        {{#if Tasks}}
         <button class="task-done-btn text-align-center col-12">
           DONE!
         </button>
+        {{/if}}
       </div>
     </section>
   </div>
