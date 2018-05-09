@@ -45,8 +45,8 @@ $(function () {
 
   // Updates DOM with current timer data
   function updateDOM ({ minutes, seconds }) {
-    $('#js-timer-minutes').val(minutes)
-    $('#js-timer-seconds').val(seconds)
+    $('#js-timer-minutes').text(minutes)
+    $('#js-timer-seconds').text(seconds)
   }
 
   // Returns the task's UUID
