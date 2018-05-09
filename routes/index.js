@@ -61,16 +61,17 @@ router.get('/teacher/class/:uuid/manage', /* isAuthenticated, */(req, res, next)
 })
 
 // Student dashboard
-router.get('/student/:uuid/dashboard', /* add psuedo-authentication, */(req, res, next) => {
+router.get('/student/:uuid/dashboard', (req, res, next) => {
   res.render('studentDashboard', { layout: '/layouts/layoutStudent' })
   // var uuid = req.params.uuid
-  // // Davis - how do we query the DB for a student's incomplete tasks?
+  // Davis - how do we query the DB for a student's incomplete tasks?
   // db.Student.find({
   //   where: { uuid },
-  //   include: {
+  //   include: [{
   //     model: db.Task,
-  //     where: { is_done: false }
-  //   }
+  //     where: { is_done: false },
+  //     required: false
+  //   }]
   // })
   //   .then(resp => res.json(resp))
   //   // .then(resp => res.render('studentDashboard', { resp, layout: '/layouts/layoutStudent' }))
