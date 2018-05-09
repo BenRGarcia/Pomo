@@ -8,22 +8,82 @@
   <div class="row">
     <div class="col-sm-12">
       <div class="card shadow">
-        <div class="card-header">Students Name | Student Id | Coins</div>
+        <div class="card-header">This Should Be The Class Name...How To Handlebars please?</div>
         <div class="card-body">
           <div class="mb-4">
-            <thead>
-              <tr>
-                <th class="checkbox">
-                  <label>Select All</label>
-                  <input type="checkbox" value="" id='js-select-all'>
-                </th>
-                <th>Student Name</th>
-                <th>Coin Count/Edit</th>
-                <th>Time Remaining</th>
-                <th>Finished Task(s)</th>
-              </tr>
-            </thead>
-            <tbody>
+            
+
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Assign Task</th>
+                  <th scope="col">Student Name</th>
+                  <th scope="col">Student Id</th>
+                  <th>Finished Task(s)</th>
+                  <th scope="col">Coin Count</th>
+                </tr>
+              </thead>
+
+
+              <tbody>
+                  <td class="checkbox">
+                  <label></label>
+                  <input type="checkbox" value="" data-add='student' id='js-select-all'>
+                  </td>
+                  <th scope="row">Mark A.</th>
+                  <td>A13421</td>
+                  <td>Yes</td>
+                  <td>25</td>
+                </tr>
+                <tr>
+                   <td class="checkbox">
+                  <label></label>
+                  <input type="checkbox" value="" data-add='student' id='js-select-all'>
+                  </td>
+                  <th scope="row">Jacob B.</th>
+                  <td>B43567</td>
+                  <td>No</td>
+                  <td>20</td>
+                </tr>
+              </tbody>
+            </table>
+
+
+            <span>
+              <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#js-modal-task-assignment" data-delete="class">
+                ADD TASKS
+              </button>
+              <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#js-modal-task-assignment" data-delete="class">
+                ADD STUDENT
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+{{!-- this button will toggle modal to add tasks --}} 
+{{!--
+<span>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#js-modal-task-assignment" data-delete="class">ADD TASKS</button>
+</span> 
+--}} 
+
+{{!-- this button will toggle the modal to delete student --}}
+{{!--
+<span>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#js-delete-student" data-delete="class"></button>
+</span> 
+--}}
+
 {{!-- Variable legend: Here's how to access all data send from the backend to `.hbs` --}}
             {{!-- 
               {{#each students}}
@@ -49,6 +109,22 @@
                 </div>
               {{#each Student}}
             --}}
+
+            {{!-- <thead>
+              <tr>
+                <th class="checkbox">
+                  <label>Select All</label>
+                  <input type="checkbox" value="" id='js-select-all'>
+                </th>
+                <th>Student Name</th>
+                <th>Coin Count/Edit</th>
+                <th>Time Remaining</th>
+                <th>Finished Task(s)</th>
+              </tr>
+            </thead>
+
+
+            <tbody>
               <tr>
                 <td class="checkbox">
                   <label></label>
@@ -63,35 +139,5 @@
                   {{/if}}
                 </td>
               </tr>
-            </tbody>
-            <span>
-              <button
-                type="button"
-                class="btn btn-outline-success"
-                data-toggle="modal"
-                data-target="#js-modal-task-assignment"
-                data-delete="class"
-              >
-                ADD TASKS
-              </button>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+            </tbody> --}}
 
-{{!-- this button will toggle modal to add tasks --}} 
-{{!--
-<span>
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#js-modal-task-assignment" data-delete="class">ADD TASKS</button>
-</span> 
---}} 
-
-{{!-- this button will toggle the modal to delete student --}}
-{{!--
-<span>
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#js-delete-student" data-delete="class"></button>
-</span> 
---}}
