@@ -27,6 +27,8 @@ router.route('/login')
           res.json({ redirectPath: `/student/login` })
         }
       })
+      // If error, redirect to login page
+      .catch(() => res.json({ redirectPath: `/student/login` }))
   })
 
 router.route('/api/students')
