@@ -48,4 +48,13 @@ describe('localhost:8080', function () {
         done()
       })
   })
+
+  it('`/student/login` should return server status `200`', function (done) {
+    chai.request('http://localhost:8080')
+      .get('/student/login')
+      .end(function (er, res) {
+        expect(res).to.have.status(200)
+        done()
+      })
+  })
 })
