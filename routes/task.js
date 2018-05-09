@@ -21,7 +21,7 @@ router.route('/new')
   .post((req, res, next) => {
     // Bulk update db
     db.Task.bulkCreate(req.body)
-      .then(() => res.status(204).send())
+      .then(() => res.status(201).send())
   })
 
 // Student starts the timer (clicks `start` button)
