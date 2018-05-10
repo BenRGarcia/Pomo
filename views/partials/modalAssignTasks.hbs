@@ -1,7 +1,7 @@
 <div class="modal fade" id="js-modal-task-assignment" tabindex="-1" role="dialog" aria-labelledby="assign-task" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header bg-light">
         <h5 class="modal-title" id="delete-student-title">Assign Task</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -14,6 +14,10 @@
             <textarea class="form-control" id="task_name"></textarea>
           </div>
           <div class="form-group">
+            <label for="js-modal-delete-input" class="col-form-label">Task Description:</label>
+            <textarea class="form-control" id="task_name"  maxlength="100"></textarea>
+          </div>
+          <div class="form-group">
             <label for="message-text" class="col-form-label">Timer Duration:</label>
             <textarea class="form-control" id="timer_duration"></textarea>
           </div>
@@ -24,8 +28,8 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-outline-success">Submit</button>
       </div>
     </div>
   </div>
