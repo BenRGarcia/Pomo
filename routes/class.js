@@ -23,8 +23,10 @@ router.route('/student')
 
   // Handle when teacher deletes student(s)
   .delete(isAuthenticated, (req, res, post) => {
-    var arrayOfStudentUUIDsToDelete = req.body
-    db.Student.bulkDelete({ where: { [Op.or]: arrayOfStudentUUIDsToDelete } })
+    console.log(`\n======\nAbout to delete a student\n======\n`, req.body)
+    db.Student.destroy({ where: { uuid: req.body.uuid } })
+      .then(() => res.status(204).send())
+      .catch(() => res.status(400).send())
   })
 
 module.exports = router
