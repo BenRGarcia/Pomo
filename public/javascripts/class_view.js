@@ -30,6 +30,19 @@ Per Davis, Send POST requests for new students to the backend in objects made wi
  */
 
 $(function () {
+  /**
+   * Teacher assigns tasks to student(s)
+   */
+
+  // Teacher clicks on 'ADD TASK' button
+  $('#js-teacher-task-assign').on('click', e => {
+    e.preventDefault()
+    console.log(`js-teacher-task-assign was just clicked`)
+  })
+  // Find all selected checkboxes on DOM
+
+  // Store values of all student's UUID's that were checked
+
   // Define global variables
   var student_UUID
   var student_Name
