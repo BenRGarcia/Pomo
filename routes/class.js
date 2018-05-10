@@ -7,7 +7,7 @@ var isAuthenticated = require('./utils/isAuthenticated.js')
  * API path '/api/class'
  */
 
-router.route('/add/student')
+router.route('/student')
   .post((req, res, next) => {
     // Get data from req body
     var name = req.body.name

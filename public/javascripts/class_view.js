@@ -37,6 +37,11 @@ $(function () {
   // Retrieve class UUID from hidden div
   var getClassUUID = () => $('#js-class-uuid').data('class-uuid')
 
+  // Retrieve students with checked box, return array of student uuid's
+  var getSelectedStudents = () => {
+
+  }
+
   /**
    * Teacher adds a student to the class
    */
@@ -53,7 +58,7 @@ $(function () {
       $('#js-add-student-name').val('')
       $('#js-add-student-id').val('')
       // Send POST to server
-      $.post('/api/class/add/student', { name, student_id, class_uuid })
+      $.post('/api/class/student', { name, student_id, class_uuid })
         .then(() => window.location.reload())
         .catch(() => window.location.reload())
     }
