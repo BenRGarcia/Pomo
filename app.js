@@ -18,6 +18,7 @@ var favicon = require('serve-favicon')
 
 var indexRouter = require('./routes/index')
 var teacherRouter = require('./routes/dashboard.js')
+var classRouter = require('./routes/class.js')
 var studentRouter = require('./routes/student.js')
 var taskRouter = require('./routes/task.js')
 
@@ -46,6 +47,7 @@ app.use('/', indexRouter)
 app.use('/api/teacher', teacherRouter)
 app.use('/api/students', studentRouter)
 app.use('/api/task', taskRouter)
+app.use('./api/class', classRouter)
 
 app.use((req, res, next) => next(createError(404)))
 
