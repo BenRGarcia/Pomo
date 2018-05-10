@@ -1,3 +1,23 @@
+/*
+Per Davis, Send POST requests for new students to the backend in objects made with something like this:
+[
+	{
+        "name": "english hw",
+        "timer_duration": 1200,
+        "coin_value": 25,
+        "student_uuid": 1
+
+    },
+	{
+        "name": "english hw",
+        "timer_duration": 1200,
+        "coin_value": 25,
+        "student_uuid": 2
+
+    }
+]
+ */
+
 $(function () {
 /**
  * Handle when teacher is viewing class
