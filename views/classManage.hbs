@@ -1,8 +1,15 @@
 {{> navigationClassManage }}
 
 <div class="container">
+  <div
+    id="js-class-uuid"
+    hidden
+    aria-hidden="true"
+    data-class-uuid="{{class_uuid}}"
+  >
+  </div>
   <div class="row">
-    <h1 class="mt-3 text-muted">Manage Class</h1>
+    <h1 class="mt-3 text-muted">Manage Class: {{CLASSNAME}}</h1>
   </div>
   <hr>
   <div class="row">
@@ -22,75 +29,39 @@
                 </tr>
               </thead>
               <tbody>
-
-                {{!-- Start dynamic template --}}
-                {{#if OBJECT}}
-                  {{#each STUDENT}}
-                    <tr>
-                      {{!-- Checkbox --}}
-                      <td class="checkbox">
-                        <input type="checkbox" data-add='student' data-student-uuid='{{STUDENTUUID}}'>
-                      </td>
-                      {{!-- Student's Name --}}
-                      <td scope="row">{{STUDENTNAME}}</td>
-                      {{!-- student's 'assigned-by-teacher' ID --}}
-                      <td>{{ STUDENTID }}</td>
-                      {{!-- Boolean of task if task finished --}}
-                      <td>
-                        {{#if TASK}}
-                          NO
-                        {{/if}}
-                        {{#unless TASK}}
-                          YES
-                        {{/unless}}
-                      </td>
-                      {{!-- Student's total coin count --}}
-                      <td>
-                        {{COINCOUNT}}
-                        <button
-                          type="button"
-                          class="btn btn-outline-warning ml-1"
-                          data-increment-coins="student"
-                          data-student-uuid='{{STUDENTUUID}}'
-                        >
-                          <i class="fas fa-plus"></i>
-                        </button>
-                      </td>
-                    </tr>
-                  {{/each}}
-                {{/if}}
-                {{!-- End dynamic template --}}
-
-                {{!-- Start hard coded example to follow --}}
-                <tr>
-                  {{!-- Checkbox --}}
-                  <td class="checkbox">
-                    <input
-                      type="checkbox"
-                      data-add='student'
-                      data-student-uuid='{{classData.student_uuid}}'
-                    >
-                  </td>
-                  {{!-- Student's Name --}}
-                  <td scope="row">Mark A.</td>
-                  {{!-- student's 'assigned-by-teacher' ID --}}
-                  <td>A13421</td>
-                  {{!-- Boolean of task if task finished --}}
-                  <td>Yes</td>
-                  {{!-- Student's total coin count --}}
-                  <td>25
-                    <button
-                      type="button"
-                      class="btn btn-outline-warning ml-1"
-                      data-increment-coins="student"
-                      data-student-uuid='{{classData.student_uuid}}'
-                    >
-                      <i class="fas fa-plus"></i>
-                    </button>
-                  </td>
-                </tr>
-                {{!-- End hard coded example to follow --}}
-
+                {{#each students}}
+                  <tr>
+                    {{!-- Checkbox --}}
+                    <td class="checkbox">
+                      <input type="checkbox" data-add='student' data-student-uuid='{{uuid}}'>
+                    </td>
+                    {{!-- Student's Name --}}
+                    <td scope="row">{{name}}</td>
+                    {{!-- student's 'assigned-by-teacher' ID --}}
+                    <td>{{ student_id }}</td>
+                    {{!-- Boolean of task if task finished --}}
+                    <td>
+                      {{#if Tasks}}
+                        NO
+                      {{/if}}
+                      {{#unless Tasks}}
+                        YES
+                      {{/unless}}
+                    </td>
+                    {{!-- Student's total coin count --}}
+                    <td>
+                      {{coin_count}}
+                      <button
+                        type="button"
+                        class="btn btn-outline-warning ml-1"
+                        data-increment-coins="student"
+                        data-student-uuid='{{uuid}}'
+                      >
+                        <i class="fas fa-plus"></i>
+                      </button>
+                    </td>
+                  </tr>
+                {{/each}}
               </tbody>
             </table>
             <div class="input-group mb-4">
