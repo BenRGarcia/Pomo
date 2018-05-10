@@ -5,8 +5,8 @@ var db = require('../models')
 // Credit coins to student
 var creditCoins = (studentUUID, coins) => {
   return new Promise((resolve, reject) => {
-    db.Student.findOne({ where: { uuid: 1 } })
-      .then(student => resolve(student.increment('coin_count', { by: 25 })))
+    db.Student.findOne({ where: { uuid: studentUUID } })
+      .then(student => resolve(student.increment('coin_count', { by: coins })))
       .catch(err => reject(err))
   })
 }
