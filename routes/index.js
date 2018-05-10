@@ -46,7 +46,7 @@ router.get('/teacher/dashboard', isAuthenticated, (req, res, next) => {
 })
 
 // Teacher sets tasks, times to students (day to day stuff)
-router.get('/teacher/class/:uuid/manage', /* isAuthenticated, */(req, res, next) => {
+router.get('/teacher/class/:uuid/manage', isAuthenticated, (req, res, next) => {
   var class_uuid = req.params.uuid
   db.Student.findAll({
     where: { class_uuid },
