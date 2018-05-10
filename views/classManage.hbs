@@ -69,26 +69,30 @@
                 {{/each}}
               </tbody>
             </table>
-            <div class="input-group mb-4">
-              <div class="input-group-prepend">
-                <span
-                  class="input-group-text bg-secondary text-white"
-                  id="js-"
+            {{!-- Add student form --}}
+            <form id="js-form-add-student">
+              <div class="input-group mb-4">
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-secondary text-white">Add Student Name</span>
+                </div>
+                <input
+                  id="js-add-student-name"
+                  type="text"
+                  class="form-control js-class-add-student"
+                  required
                 >
-                  Add Student Name
-                </span>
-              </div>
-              <input type="text" class="form-control">
-              <div class="input-group-prepend">
-                <span
-                  class="input-group-text bg-secondary text-white"
-                  id="js-"
+                <div class="input-group-prepend">
+                  <span class="input-group-text bg-secondary text-white">Add Student Id</span>
+                </div>
+                <input
+                  id="js-add-student-id"
+                  type="text"
+                  class="form-control js-class-add-student"
+                  required
                 >
-                  Add Student Id
-                </span>
               </div>
-              <input type="text" class="form-control">
-            </div>
+            </form>
+            {{!-- End 'Add student form' --}}
             <span>
               <button
                 type="button"
