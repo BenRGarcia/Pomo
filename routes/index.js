@@ -62,20 +62,13 @@ router.get('/teacher/class/:uuid/manage', /* isAuthenticated, */(req, res, next)
 
 // Student dashboard
 router.get('/student/:uuid/dashboard', (req, res, next) => {
-  res.render('studentDashboard', { layout: '/layouts/layoutStudent' })
-  // var uuid = req.params.uuid
+  // res.render('studentDashboard', { layout: '/layouts/layoutStudent' })
+  var uuid = req.params.uuid
   // Davis - how do we query the DB for a student's incomplete tasks?
-  // db.Student.find({
-  //   where: { uuid },
-  //   include: [{
-  //     model: db.Task,
-  //     where: { is_done: false },
-  //     required: false
-  //   }]
-  // })
-  //   .then(resp => res.json(resp))
-  //   // .then(task => res.render('studentDashboard', { task, layout: '/layouts/layoutStudent' }))
-  //   .catch(err => res.json(err))
+  db.Task.findAll({ where: { student_uuid: uuid, is_done: false } })
+    // .then(resp => res.json(resp[0]))
+    .then(Tasks => res.render('studentDashboard', { Tasks: Tasks[0], layout: '/layouts/layoutStudent' }))
+    .catch(err => res.json(err))
 })
 
 module.exports = router

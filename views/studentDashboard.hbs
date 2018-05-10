@@ -2,9 +2,9 @@
   hidden 
   aria-hidden='true' 
   id='js-timer-raw-data'
-  data-start-time='{{start_time}}'
-  data-duration='{{timer_duration}}'
-  data-uuid='{{uuid}}'
+  data-start-time='{{Tasks.start_time}}'
+  data-duration='{{Tasks.timer_duration}}'
+  data-uuid='{{Tasks.uuid}}'
 >
 </div>
 
@@ -33,17 +33,17 @@ Backend will send in a `Tasks` object to .hbs that looks like this:
         <div class="task-title">
           Task
         </div>
-        {{#if name}}
+        {{#if Tasks.name}}
         <div id="task-name">
-          {{name}}
+          {{Tasks.name}}
         </div>
         {{/if}}
-        {{#if description}}
+        {{#if Tasks.description}}
         <div id="task-description">
-          {{description}}
+          {{Tasks.description}}
         </div>
         {{/if}}
-        {{#if Tasks}}
+        {{#if Tasks.name}}
         <button class="task-done-btn text-align-center col-12">
           DONE!
         </button>
