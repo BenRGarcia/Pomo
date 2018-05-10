@@ -49,7 +49,7 @@ router.route('/logout')
 
 // Teacher can DELETE a class
 router.route('/class/:uuid')
-  .delete(/* isAuthenticated, */ (req, res, next) => {
+  .delete(isAuthenticated, (req, res, next) => {
     db.Class.destroy({ where: { uuid: req.params.uuid } })
       .then(() => res.status(204).send())
       .catch(err => console.error(err))
@@ -58,7 +58,7 @@ router.route('/class/:uuid')
 // Teacher can ADD a new class
 router.route('/class/add')
   .post(isAuthenticated, (req, res, next) => {
-    db.Class.create({ name: req.body.name, user_uuid: req.uuid })
+    db.Class.create({ name: req.body.name, password: req.body.password, user_uuid: req.uuid })
       .then(() => res.status(201).send())
       .catch(err => console.error(err))
   })
