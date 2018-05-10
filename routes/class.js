@@ -8,7 +8,9 @@ var isAuthenticated = require('./utils/isAuthenticated.js')
  */
 
 router.route('/student')
-  .post((req, res, next) => {
+
+  // Handle when teacher adds new student
+  .post(isAuthenticated, (req, res, next) => {
     // Get data from req body
     var name = req.body.name
     var student_id = req.body.student_id
@@ -17,6 +19,12 @@ router.route('/student')
     db.Student.create({ name, student_id, class_uuid })
       .then(() => res.status(201).send())
       .catch(() => res.status(400).send())
+  })
+
+  // Handle when teacher deletes student(s)
+  .delete(isAuthenticated, (req, res, post) => {
+    var arrayOfStudentUUIDsToDelete = req.body
+    db.Student.bulkDelete({ where: { [Op.or]: arrayOfStudentUUIDsToDelete } })
   })
 
 module.exports = router
