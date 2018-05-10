@@ -39,24 +39,26 @@ $(function () {
   // Returns object with minutes and seconds props
   function formatTimer (secondsRemaining) {
     var minutes = Math.floor(secondsRemaining / 60)
-    var seconds = secondsRemaining % 60
+    var seconds = Math.floor(secondsRemaining % 60)
     return { minutes, seconds }
   }
 
   // Updates DOM with current timer data
   function updateDOM ({ minutes, seconds }) {
+    console.log(`minutes: ${minutes} seconds: ${seconds}`)
     $('#js-timer-minutes').text(minutes)
     $('#js-timer-seconds').text(seconds)
   }
 
   // Returns the task's UUID
   function getTaskUUID () {
-    return $('#js-task-raw-data').data('uuid')
+    console.log(`$('#js-timer-raw-data').data('uuid') is: ${$('#js-timer-raw-data').data('uuid')}`)
+    return $('#js-timer-raw-data').data('uuid')
   }
 
   // Sends POST request that timer is started
   function startTask () {
-    var taskUUID = getTaskUUID
+    var taskUUID = getTaskUUID()
     $.post('/api/task/timer/start', { taskUUID })
       .then(() => window.location.reload())
       .catch(() => window.location.reload())
@@ -65,7 +67,11 @@ $(function () {
   // Send post request that task is complete
   function completeTask () {
     var taskUUID = getTaskUUID
-    $.post('/api/task/timer/done', { taskUUID })
+    $.ajax({
+      url: '/api/task/timer/done',
+      method: 'PUT',
+      data: { taskUUID }
+    })
       .then(() => window.location.reload())
       .catch(() => window.location.reload())
   }

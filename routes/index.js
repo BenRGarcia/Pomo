@@ -62,11 +62,8 @@ router.get('/teacher/class/:uuid/manage', /* isAuthenticated, */(req, res, next)
 
 // Student dashboard
 router.get('/student/:uuid/dashboard', (req, res, next) => {
-  // res.render('studentDashboard', { layout: '/layouts/layoutStudent' })
   var uuid = req.params.uuid
-  // Davis - how do we query the DB for a student's incomplete tasks?
   db.Task.findAll({ where: { student_uuid: uuid, is_done: false } })
-    // .then(resp => res.json(resp[0]))
     .then(Tasks => res.render('studentDashboard', { Tasks: Tasks[0], layout: '/layouts/layoutStudent' }))
     .catch(err => res.json(err))
 })
