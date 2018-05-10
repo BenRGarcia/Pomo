@@ -48,6 +48,14 @@ router.get('/teacher/dashboard', isAuthenticated, (req, res, next) => {
 // Teacher sets tasks, times to students (day to day stuff)
 router.get('/teacher/class/:uuid/manage', isAuthenticated, (req, res, next) => {
   var class_uuid = req.params.uuid
+  var classPassword
+  var className
+  db.Class.findOne({ where: { uuid: class_uuid } })
+    .then(classData => {
+      console.log(classData)
+      className = classData.dataValues.name
+      classPassword = classData.dataValues.password
+    })
   db.Student.findAll({
     where: { class_uuid },
     include: [{
@@ -56,7 +64,7 @@ router.get('/teacher/class/:uuid/manage', isAuthenticated, (req, res, next) => {
       required: false
     }]
   })
-    .then(students => res.render('classManage', { students, class_uuid, layout: '/layouts/layoutTeacher' }))
+    .then(students => res.render('classManage', { students, class_uuid, classPassword, className, layout: '/layouts/layoutTeacher' }))
     .catch(err => res.json(err))
 })
 
