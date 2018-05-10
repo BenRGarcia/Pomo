@@ -10,6 +10,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: { len: [1] }
     },
+    student_id: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: { len: [1] }
+    },
     coin_count: {
       type: DataTypes.INTEGER,
       defaultValue: 0,
