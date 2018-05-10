@@ -63,7 +63,8 @@ $(function () {
   $('body').on('submit', '#js-form-class-add', e => {
     e.preventDefault()
     var name = $('#js-modal-class-add-name').val()
-    $.post('/api/teacher/class/add', { name })
+    var password = $('#js-modal-class-add-password').val()
+    $.post('/api/teacher/class/add', { name, password })
       .then(() => window.location.reload())
       .catch(() => window.location.reload())
   })
