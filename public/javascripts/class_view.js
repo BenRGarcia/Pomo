@@ -30,7 +30,44 @@ Per Davis, Send POST requests for new students to the backend in objects made wi
  */
 
 $(function () {
-  console.log(`page has loaded`)
+  // Define global variables
+  var studentUUID
+  var studentName
+
+  /**
+   * Handle when teacher deletes a student
+   */
+
+  // Teacher clicks icon to delete a student
+  $('body').on('click', 'button[data-delete=student]', e => {
+    // Define data for class to delete
+    studentUUID = $(e.target).data('id')
+    studentName = $(e.target).data('name')
+  })
+
+  // Trigger focus to input box on modal when shown
+  $('#js-modal-student-delete').on('shown.bs.modal', () => {
+    $('#js-modal-delete-input').trigger('focus')
+  })
+
+  // Clear modal's input box if modal closed
+  $('#js-modal-student-delete').on('hidden.bs.modal', () => {
+    $('#js-modal-delete-input').val('')
+  })
+
+  // Teacher reconfirms deletion of class by typing out class name
+  $('#js-modal-student-delete').on('keyup', () => {
+    var userInput = $('#js-modal-delete-input').val()
+    // If class name input matches name of class to delete ...
+    if (userInput === studentName) {
+      // ... remove disabled attribute of submit button
+      $('#js-modal-delete-button').prop('disabled', false)
+    } else {
+      // ... or disable button because name doesn't match
+      $('#js-modal-delete-button').prop('disabled', true)
+    }
+  })
+
   /**
    * Helper functions
    */
