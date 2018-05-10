@@ -70,18 +70,13 @@ $(function () {
   })
 
   // Teacher submits confirmed deletion of class
-  $('body').on('submit', 'js-delete-student-form', e => {
-    console.log(`Frontend wants to send AJAX delete to the backend`)
+  $('body').on('submit', '#js-delete-student-form', e => {
     e.preventDefault()
     // Ignore form submission if delete button disabled
     if ($('#js-modal-delete-button').prop('disabled') === false) {
       console.log(`Frontend is sending AJAX delete to the backend`)
-      $.ajax({
-        url: '/api/class/student',
-        method: 'DELETE',
-        data: { uuid: student_UUID }
-      })
-      // .then(() => window.location.reload())
+      $.ajax(`/api/class/student/${student_UUID}`, { type: 'DELETE' })
+        .then(() => window.location.reload())
       // .catch(() => window.location.reload())
     } else { /* ... do nothing */ }
   })

@@ -21,10 +21,11 @@ router.route('/student')
       .catch(() => res.status(400).send())
   })
 
+router.route('/student/:uuid')
   // Handle when teacher deletes student(s)
   .delete(isAuthenticated, (req, res, post) => {
     console.log(`\n======\nAbout to delete a student\n======\n`, req.body)
-    db.Student.destroy({ where: { uuid: req.body.uuid } })
+    db.Student.destroy({ where: { uuid: req.params.uuid } })
       .then(() => res.status(204).send())
       .catch(() => res.status(400).send())
   })
