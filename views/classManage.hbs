@@ -11,9 +11,10 @@
         <div class="card-header">This Should Be The Class Name...How To Handlebars please?</div>
         <div class="card-body">
           <div class="mb-4">
-            
+
 
             <table class="table table-striped">
+
               <thead>
                 <tr>
                   <th scope="col">Assign Task</th>
@@ -26,118 +27,59 @@
 
 
               <tbody>
-                  <td class="checkbox">
+                <td class="checkbox">
                   <label></label>
                   <input type="checkbox" value="" data-add='student' id='js-select-all'>
-                  </td>
-                  <th scope="row">Mark A.</th>
-                  <td>A13421</td>
-                  <td>Yes</td>
-                  <td>25</td>
+                </td>
+                <th scope="row">Mark A.</th>
+                <td>A13421</td>
+                <td>Yes</td>
+                <td>25
+                  <button type="button" class="btn btn-outline-warning ml-1" data-toggle="" data-target="" data-delete="class">
+                    <i class="fas fa-plus"></i>
+                  </button>
+                </td>
                 </tr>
+
                 <tr>
-                   <td class="checkbox">
-                  <label></label>
-                  <input type="checkbox" value="" data-add='student' id='js-select-all'>
+                  <td class="checkbox">
+                    <label></label>
+                    <input type="checkbox" value="" data-add='student' id='js-select-all'>
                   </td>
                   <th scope="row">Jacob B.</th>
                   <td>B43567</td>
                   <td>No</td>
-                  <td>20</td>
+                  <td>20
+                    <button type="button" class="btn btn-outline-warning ml-1" data-toggle="" data-target="" data-delete="class">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </td>
                 </tr>
               </tbody>
             </table>
+
+
+            <div class="input-group mb-4">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="">Add Student Name</span>
+              </div>
+              <input type="text" class="form-control">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="">Add Student Id</span>
+              </div>
+              <input type="text" class="form-control">
+            </div>
 
 
             <span>
               <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#js-modal-task-assignment" data-delete="class">
                 ADD TASKS
               </button>
-              <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#js-modal-task-assignment" data-delete="class">
-                ADD STUDENT
-              </button>
             </span>
+            {{>modalAssignTasks}}
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-{{!-- this button will toggle modal to add tasks --}} 
-{{!--
-<span>
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#js-modal-task-assignment" data-delete="class">ADD TASKS</button>
-</span> 
---}} 
-
-{{!-- this button will toggle the modal to delete student --}}
-{{!--
-<span>
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#js-delete-student" data-delete="class"></button>
-</span> 
---}}
-
-{{!-- Variable legend: Here's how to access all data send from the backend to `.hbs` --}}
-            {{!-- 
-              {{#each students}}
-                <div>
-                  <p>students.uuid: {{uuid}}</p>
-                  <p>students.name: {{name}}</p>
-                  <p>students.coin_count: {{coin_count}}</p>
-                  <p>students.class_uuid: {{class_uuid}}</p>
-                  <h3>tasks:</h3>
-                  <ul>
-                    {{#each Tasks}}
-                      <li style="color: #000;">
-                        task.uuid: {{this.uuid}} 
-                        task.name: {{this.name}} 
-                        task.timer_duration: {{this.timer_duration}} 
-                        task.start_time: {{this.start_time}}
-                        task.is_done: {{this.is_done}} 
-                        task.coin_value: {{this.coin_value}} 
-                        task.student_uuid: {{this.student_uuid}}
-                      </li>
-                    {{/each}}
-                  </ul>
-                </div>
-              {{#each Student}}
-            --}}
-
-            {{!-- <thead>
-              <tr>
-                <th class="checkbox">
-                  <label>Select All</label>
-                  <input type="checkbox" value="" id='js-select-all'>
-                </th>
-                <th>Student Name</th>
-                <th>Coin Count/Edit</th>
-                <th>Time Remaining</th>
-                <th>Finished Task(s)</th>
-              </tr>
-            </thead>
-
-
-            <tbody>
-              <tr>
-                <td class="checkbox">
-                  <label></label>
-                  <input type="checkbox" value="" data-add='student' id='js-select-all'>
-                </td>
-                <td>{{name}}</td>
-                <td contenteditable='true'>{{coin_count}}</td>
-                <td>{{timeRemaining}}</td>
-                <td>
-                  {{#if isDone}}
-                    <span class="glyphicon">&#xe013;</span>
-                  {{/if}}
-                </td>
-              </tr>
-            </tbody> --}}
-
