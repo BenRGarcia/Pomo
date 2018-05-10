@@ -8,7 +8,9 @@
   <div class="row">
     <div class="col-sm-12">
       <div class="card shadow">
-        <div class="card-header">This Should Be The Class Name...How To Handlebars please?</div>
+        <div class="card-header">Assign Task    |    Add Students    |    Add Task    |    Add Coins
+
+        </div>
         <div class="card-body">
           <div class="mb-4">
 
@@ -61,11 +63,11 @@
 
             <div class="input-group mb-4">
               <div class="input-group-prepend">
-                <span class="input-group-text" id="">Add Student Name</span>
+                <span class="input-group-text  bg-secondary text-white" id="">Add Student Name</span>
               </div>
               <input type="text" class="form-control">
               <div class="input-group-prepend">
-                <span class="input-group-text" id="">Add Student Id</span>
+                <span class="input-group-text  bg-secondary text-white" id="">Add Student Id</span>
               </div>
               <input type="text" class="form-control">
             </div>
@@ -73,7 +75,10 @@
 
             <span>
               <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#js-modal-task-assignment" data-delete="class">
-                ADD TASKS
+                ADD TASK(S)
+              </button>
+              <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#js-delete-student" data-delete="class">
+                DELETE STUDENT(S)
               </button>
             </span>
             {{>modalAssignTasks}}
