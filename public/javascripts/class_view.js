@@ -16,6 +16,19 @@ Per Davis, Send POST requests for new students to the backend in objects made wi
 
     }
 ]
+
+      var studentIds = [1, 2]
+      var queryArray = []
+
+      for (var i = 0; i < studentIds.length; i++) {
+        var taskObj = {
+          name: 'english hw',
+          timer_duration: 1200,
+          coin_value: 25,
+          student_uuid: studentIds[i]
+        }
+        queryArray.push(taskObj)
+      }
  */
 
 $(function () {
