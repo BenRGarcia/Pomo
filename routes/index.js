@@ -52,7 +52,6 @@ router.get('/teacher/class/:uuid/manage', isAuthenticated, (req, res, next) => {
   var className
   db.Class.findOne({ where: { uuid: class_uuid } })
     .then(classData => {
-      console.log(classData)
       className = classData.dataValues.name
       classPassword = classData.dataValues.password
     })
