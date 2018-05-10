@@ -30,12 +30,67 @@ Per Davis, Send POST requests for new students to the backend in objects made wi
  */
 
 $(function () {
-  console.log(`page has loaded`)
+  // Define global variables
+  var student_UUID
+  var student_Name
+
+  /**
+   * Handle when teacher deletes a student
+   */
+
+  // Teacher clicks icon to delete a student
+  $('body').on('click', 'button[data-delete=student]', e => {
+    // Define data for class to delete
+    student_UUID = $(e.target).data('id')
+    student_Name = $(e.target).data('name')
+  })
+
+  // Trigger focus to input box on modal when shown
+  $('#js-modal-student-delete').on('shown.bs.modal', () => {
+    $('#js-modal-delete-input').trigger('focus')
+  })
+
+  // Clear modal's input box if modal closed
+  $('#js-modal-student-delete').on('hidden.bs.modal', () => {
+    $('#js-modal-delete-button').prop('disabled', true)
+    $('#js-modal-delete-input').val('')
+  })
+
+  // Teacher reconfirms deletion of student by typing out student name
+  $('#js-modal-student-delete').on('keyup', () => {
+    var userInput = $('#js-modal-delete-input').val()
+    // If student name input matches name of student to delete ...
+    if (userInput === student_Name) {
+      // ... remove disabled attribute of submit button
+      $('#js-modal-delete-button').prop('disabled', false)
+    } else {
+      // ... or disable button because name doesn't match
+      $('#js-modal-delete-button').prop('disabled', true)
+    }
+  })
+
+  // Teacher submits confirmed deletion of class
+  $('body').on('submit', '#js-delete-student-form', e => {
+    e.preventDefault()
+    // Ignore form submission if delete button disabled
+    if ($('#js-modal-delete-button').prop('disabled') === false) {
+      console.log(`Frontend is sending AJAX delete to the backend`)
+      $.ajax(`/api/class/student/${student_UUID}`, { type: 'DELETE' })
+        .then(() => window.location.reload())
+      // .catch(() => window.location.reload())
+    } else { /* ... do nothing */ }
+  })
+
   /**
    * Helper functions
    */
   // Retrieve class UUID from hidden div
   var getClassUUID = () => $('#js-class-uuid').data('class-uuid')
+
+  // Retrieve students with checked box, return array of student uuid's
+  var getSelectedStudents = () => {
+
+  }
 
   /**
    * Teacher adds a student to the class
@@ -53,7 +108,7 @@ $(function () {
       $('#js-add-student-name').val('')
       $('#js-add-student-id').val('')
       // Send POST to server
-      $.post('/api/class/add/student', { name, student_id, class_uuid })
+      $.post('/api/class/student', { name, student_id, class_uuid })
         .then(() => window.location.reload())
         .catch(() => window.location.reload())
     }
@@ -149,18 +204,18 @@ $(function () {
   //   $('body').on('submit', '#js-modal-add-student', e => {
   //     e.preventDefault()
 
-  //     var newStudentName = $('#new_student').val().trim()
+  //     var newStudent_Name = $('#new_student').val().trim()
   //     var coin_count = $('#coin_count').val().trim()
 
   //     var addNewStudent = {
-  //       name: newStudentName,
+  //       name: newStudent_Name,
   //       coin_count: coin_count
   //     }
 
   //     $.post('/api/students/', addNewStudent)
   //       .then(
   //         function () {
-  //           console.log('new student add', newStudentName)
+  //           console.log('new student add', newStudent_Name)
   //           window.location.reload()
   //         }
   //       )

@@ -1,4 +1,4 @@
-<div class="modal fade" id="js-delete-class" tabindex="-1" role="dialog"      aria-labelledby="delete-student" aria-hidden="true">
+<div class="modal fade" id="js-modal-student-delete" tabindex="-1" role="dialog" aria-labelledby="delete-student" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header bg-light">
@@ -8,19 +8,26 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
-          <p>This action cannot be undone. This will permanently delete {{student.name}} class.</p>
+        <form id="js-delete-student-form">
+          <p>This action cannot be undone. This will permanently delete the student.</p>
           <br>
-          <p>Please type in the name of the class to confirm.</p>
+          <p>Please type in the name of the student to confirm deletion.</p>
           <div class="form-group">
-            <label for="js-modal-delete-input" class="col-form-label">Class:</label>
-            <textarea class="form-control" id="js-modal-delete-input"></textarea>
+            <label for="js-modal-delete-input" class="col-form-label">Student Name:</label>
+            <input class="form-control" id="js-modal-delete-input"></input>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button
+          id="js-modal-delete-button"
+          type="submit"
+          class="btn btn-danger"
+          form="js-delete-student-form"
+          disabled
+        >
+          Permanently Delete Student
+        </button>
       </div>
     </div>
   </div>
