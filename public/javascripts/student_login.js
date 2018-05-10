@@ -12,8 +12,8 @@ $(function () {
     // Compose student object
     var student = { name, password }
     // Send POST to server
-    $.post('api/students/login', student)
+    $.post('/api/students/login', student)
       .then(res => window.location.replace(res.redirectPath))
-      .catch(err => console.error(`student login error`, err))
+      .catch(() => window.location.reload())
   })
 })

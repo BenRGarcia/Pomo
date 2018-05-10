@@ -11,53 +11,28 @@ var db = require('../models')
 router.route('/login')
   .post((req, res, next) => {
     // Get data from req body
-    var name = req.body.name
-    var password = req.body.password
-    // Query database for class database
-    db.Class.findOne({ where: { howDoWeDoThis: `I don't know` } })
-      .then(classData => classData.password)
-      .then(classPassword => {
-        // Check if class 'password' is correct
-        if (classPassword === password) {
-          // If yes, find student and redirect to student dashboard page
-          db.Student.findOne({ where: { name } })
-            .then(student => res.json({ redirectPath: `/student/${student.uuid}/dashboard` }))
+    var studentId = req.body.name
+    var classPassword = req.body.password
+    var studentUUID
+    // Using the studentId provided, find student's UUID and class UUID association
+    db.Student.findOne({ where: { student_id: studentId } })
+      // With the class' uuid, find the password for the class as set by the teacher
+      .then(student => {
+        studentUUID = student.dataValues.uuid
+        return db.Class.findOne({ where: { uuid: student.dataValues.class_uuid } })
+      })
+      // Evaluate password, then redirect student to dashboard
+      .then(classData => {
+        // If password matches
+        if (classPassword === classData.dataValues.password) {
+          // Redirect to student dashboard
+          res.json({ redirectPath: `/student/${studentUUID}/dashboard` })
         } else {
-          // Else redirect to login page
+          // Redirect to login page
           res.json({ redirectPath: `/student/login` })
         }
       })
-      // If error, redirect to login page
       .catch(() => res.json({ redirectPath: `/student/login` }))
-  })
-
-router.route('/api/students')
-  // GET requests for this path
-  .get((req, res, next) => {
-    db.Student.findAll({ include: [db.Class, db.Task] })
-      .then((dbStudent) => res.json(dbStudent))
-  })
-  // POST requests for this path
-  .post((req, res, next) => {
-    db.Student.create(req.body)
-      .then((dbStudent) => res.json(dbStudent))
-  })
-  // PUT requests for this path
-  .put((req, res, next) => {
-    db.Student.update(req.body, { where: { id: req.body.id } })
-      .then((dbStudent) => res.json(dbStudent))
-  })
-  // DELETE requests for this path
-  .delete((req, res, next) => {
-    db.Student.destroy({ where: { id: req.params.id } })
-      .then((dbStudent) => res.json(dbStudent))
-  })
-
-router.route('/api/students/:id')
-  // GET requests for this path
-  .get((req, res, next) => {
-    db.Student.findOne({ where: { id: req.params.id }, include: [db.Class, db.Task] })
-      .then((dbStudent) => res.json(dbStudent))
   })
 
 module.exports = router
