@@ -69,10 +69,11 @@
                     <button
                       type="button"
                       class="btn btn-outline-danger my-2 my-sm-0"
-                      data-target="js-delete-student"
-                      data-delete="class"
+                      data-delete="student"
                       data-id="{{uuid}}"
                       data-name="{{name}}"
+                      data-toggle="modal"
+                      data-target="#js-modal-student-delete"
                     >
                       <i class="fas fa-trash-alt"></i>
                     </button>
@@ -117,6 +118,7 @@
               </button>
             </span>
             {{>modalAssignTasks}}
+            {{> modalDeleteStudent }}
           </div>
         </div>
       </div>
