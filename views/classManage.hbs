@@ -29,7 +29,7 @@
                   <th scope="col">Assign Task</th>
                   <th scope="col">Student Name</th>
                   <th scope="col">Login Id</th>
-                  <th scope="col">Finished Task(s)</th>
+                  <th scope="col">Task Status</th>
                   <th scope="col">Coin Count</th>
                 </tr>
               </thead>
@@ -47,10 +47,10 @@
                     {{!-- Boolean of task if task finished --}}
                     <td>
                       {{#if Tasks}}
-                        NO
+                        In-progess
                       {{/if}}
                       {{#unless Tasks}}
-                        YES
+                        --
                       {{/unless}}
                     </td>
                     {{!-- Student's total coin count --}}
@@ -113,6 +113,7 @@
             {{!-- End 'Add student form' --}}
             <span>
               <button
+                id="js-teacher-task-assign"
                 type="button"
                 class="btn btn-outline-success"
                 data-toggle="modal"
