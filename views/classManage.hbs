@@ -65,6 +65,18 @@
                         <i class="fas fa-plus"></i>
                       </button>
                     </td>
+                    <td>
+                    <button
+                      type="button"
+                      class="btn btn-outline-danger my-2 my-sm-0"
+                      data-target="js-delete-student"
+                      data-delete="class"
+                      data-id="{{uuid}}"
+                      data-name="{{name}}"
+                    >
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                    </td>
                   </tr>
                 {{/each}}
               </tbody>
@@ -102,15 +114,6 @@
                 data-delete="class"
               >
                 ADD TASK(S)
-              </button>
-              <button
-                type="button"
-                class="btn btn-outline-danger"
-                data-toggle="modal"
-                data-target="#js-delete-student"
-                data-delete="class"
-              >
-                DELETE STUDENT(S)
               </button>
             </span>
             {{>modalAssignTasks}}
