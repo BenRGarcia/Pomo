@@ -47,7 +47,7 @@ app.use('/', indexRouter)
 app.use('/api/teacher', teacherRouter)
 app.use('/api/students', studentRouter)
 app.use('/api/task', taskRouter)
-app.use('./api/class', classRouter)
+app.use('/api/class', classRouter)
 
 app.use((req, res, next) => next(createError(404)))
 
