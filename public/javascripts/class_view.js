@@ -38,10 +38,10 @@ $(function () {
   $('#js-teacher-task-assign').on('click', e => {
     e.preventDefault()
     console.log(`js-teacher-task-assign was just clicked`)
-  })
-  // Find all selected checkboxes on DOM
+    // Find all selected checkboxes on DOM
 
-  // Store values of all student's UUID's that were checked
+    // Store values of all student's UUID's that were checked
+  })
 
   // Define global variables
   var student_UUID
@@ -169,102 +169,5 @@ $(function () {
   //   var task_name = $('#task_name').val('')
   //   var timer_duration = $('#timer_duration').val('')
   //   var coin_value = $('#coin_value').val('')
-  // })
-
-  // // NEED HELP WITH ADDING AND DELETING COINS!
-
-  // // add coins
-  // $('body').on('click', 'span[data-coin-adjust=coin]', e => {
-  //   // get the attribute of each button
-  //   var increment_coin = $(e.target).data('increment_coin')
-  //   var student_uuid = $(e.target).data('student_uuid')
-  //   var coin_amount = increment_coin.val()
-
-  //   var new_coin_value = {
-  //     coin_count: coin_amount++
-  //   }
-
-  //   $.put('/api/student/add' + student_uuid, new_coin_value)
-  //     .then(
-  //       e => {
-  //         window.location.reload()
-  //       }
-  //     )
-  // })
-
-  // // **delete coin from each student
-  // $('body').on('click', 'span[data-coin-adjust=coin]', e => {
-  //   // get the attribute of each button
-  //   var decrement_coin = $(e.target).data('decrement_coin')
-  //   var student_uuid = $(e.target).data('student_uuid')
-  //   var coin_amount = decrement_coin.val()
-
-  //   var new_coin_value = {
-  //     coin_count: coin_amount--
-  //   }
-  //   $.put('/api/student/add' + student_uuid, new_coin_value)
-  //     .then(
-  //       e => {
-  //         window.location.reload()
-  //       }
-  //     )
-  // })
-
-  // // add student to class
-  // $('body').on('click', '#js-add-student', e => {
-  //   $('#js-modal-add-student').modal('show')
-
-  //   $('body').on('submit', '#js-modal-add-student', e => {
-  //     e.preventDefault()
-
-  //     var newStudent_Name = $('#new_student').val().trim()
-  //     var coin_count = $('#coin_count').val().trim()
-
-  //     var addNewStudent = {
-  //       name: newStudent_Name,
-  //       coin_count: coin_count
-  //     }
-
-  //     $.post('/api/students/', addNewStudent)
-  //       .then(
-  //         function () {
-  //           console.log('new student add', newStudent_Name)
-  //           window.location.reload()
-  //         }
-  //       )
-  //       .catch(err => console.error(err.message))
-  //     $('#new_student').val('')
-  //     $('#coint_count').val('')
-  //     $('#js-modal-add-student').modal('hide')
-  //   })
-  // })
-
-  // // delete student from class
-  // $('body').on('click', 'span[data-delete=student]', e => {
-  //   // get the name of the class to insert into modal
-  //   var student_uuid = $(e.target).data('student_uuid') // student_uuid: adfgdfg-45465u-sfgb
-  //   var student_name = $(e.target).data('student_name') // 'John Smith'
-
-  //   $('#js-modal-delete-student').modal('show') // has form input and submit button
-
-  //   var userInput = $('#js-modal-delete-input').val()
-
-  //   if (userInput === student_name) {
-  //     $('#js-modal-delete-student').prop('disabled', false)
-  //   } else {
-  //     $('#js-modal-delete-student').prop('disabled', true)
-  //   }
-
-  //   $('#js-modal-delete-student').on('submit', 'form', e => {
-  //     e.preventDefault()
-  //     $.ajax('/api/student/' + student_uuid, {
-  //       type: 'DELETE'
-  //     }).then(
-  //       function () {
-  //         console.log('deleted class', class_uuid)
-  //         window.location.reload()
-  //       }
-  //     )
-  //   })
   // })
 })
