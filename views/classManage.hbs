@@ -8,76 +8,128 @@
   <div class="row">
     <div class="col-sm-12">
       <div class="card shadow">
-        <div class="card-header">Assign Task    |    Add Students    |    Add Task    |    Add Coins
-
-        </div>
+        <div class="card-header">Assign Task    |    Add Students    |    Add Task    |    Add Coins</div>
         <div class="card-body">
           <div class="mb-4">
-
-
             <table class="table table-striped">
-
               <thead>
                 <tr>
                   <th scope="col">Assign Task</th>
                   <th scope="col">Student Name</th>
                   <th scope="col">Student Id</th>
-                  <th>Finished Task(s)</th>
+                  <th scope="col">Finished Task(s)</th>
                   <th scope="col">Coin Count</th>
                 </tr>
               </thead>
-
-
               <tbody>
-                <td class="checkbox">
-                  <label></label>
-                  <input type="checkbox" value="" data-add='student' id='js-select-all'>
-                </td>
-                <th scope="row">Mark A.</th>
-                <td>A13421</td>
-                <td>Yes</td>
-                <td>25
-                  <button type="button" class="btn btn-outline-warning ml-1" data-toggle="" data-target="" data-delete="class">
-                    <i class="fas fa-plus"></i>
-                  </button>
-                </td>
-                </tr>
 
+                {{!-- Start dynamic template --}}
+                {{#if OBJECT}}
+                  {{#each STUDENT}}
+                    <tr>
+                      {{!-- Checkbox --}}
+                      <td class="checkbox">
+                        <input type="checkbox" data-add='student' data-student-uuid='{{STUDENTUUID}}'>
+                      </td>
+                      {{!-- Student's Name --}}
+                      <td scope="row">{{STUDENTNAME}}</td>
+                      {{!-- student's 'assigned-by-teacher' ID --}}
+                      <td>{{ STUDENTID }}</td>
+                      {{!-- Boolean of task if task finished --}}
+                      <td>
+                        {{#if TASK}}
+                          NO
+                        {{/if}}
+                        {{#unless TASK}}
+                          YES
+                        {{/unless}}
+                      </td>
+                      {{!-- Student's total coin count --}}
+                      <td>
+                        {{COINCOUNT}}
+                        <button
+                          type="button"
+                          class="btn btn-outline-warning ml-1"
+                          data-increment-coins="student"
+                          data-student-uuid='{{STUDENTUUID}}'
+                        >
+                          <i class="fas fa-plus"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  {{/each}}
+                {{/if}}
+                {{!-- End dynamic template --}}
+
+                {{!-- Start hard coded example to follow --}}
                 <tr>
+                  {{!-- Checkbox --}}
                   <td class="checkbox">
-                    <label></label>
-                    <input type="checkbox" value="" data-add='student' id='js-select-all'>
+                    <input
+                      type="checkbox"
+                      data-add='student'
+                      data-student-uuid='{{classData.student_uuid}}'
+                    >
                   </td>
-                  <th scope="row">Jacob B.</th>
-                  <td>B43567</td>
-                  <td>No</td>
-                  <td>20
-                    <button type="button" class="btn btn-outline-warning ml-1" data-toggle="" data-target="" data-delete="class">
+                  {{!-- Student's Name --}}
+                  <td scope="row">Mark A.</td>
+                  {{!-- student's 'assigned-by-teacher' ID --}}
+                  <td>A13421</td>
+                  {{!-- Boolean of task if task finished --}}
+                  <td>Yes</td>
+                  {{!-- Student's total coin count --}}
+                  <td>25
+                    <button
+                      type="button"
+                      class="btn btn-outline-warning ml-1"
+                      data-increment-coins="student"
+                      data-student-uuid='{{classData.student_uuid}}'
+                    >
                       <i class="fas fa-plus"></i>
                     </button>
                   </td>
                 </tr>
+                {{!-- End hard coded example to follow --}}
+
               </tbody>
             </table>
-
-
             <div class="input-group mb-4">
               <div class="input-group-prepend">
-                <span class="input-group-text  bg-secondary text-white" id="">Add Student Name</span>
+                <span
+                  class="input-group-text bg-secondary text-white"
+                  id="js-"
+                >
+                  Add Student Name
+                </span>
               </div>
               <input type="text" class="form-control">
               <div class="input-group-prepend">
-                <span class="input-group-text  bg-secondary text-white" id="">Add Student Id</span>
+                <span
+                  class="input-group-text bg-secondary text-white"
+                  id="js-"
+                >
+                  Add Student Id
+                </span>
               </div>
               <input type="text" class="form-control">
             </div>
-
-
             <span>
-              <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#js-modal-task-assignment" data-delete="class">
+              <button
+                type="button"
+                class="btn btn-outline-success"
+                data-toggle="modal"
+                data-target="#js-modal-task-assignment"
+                data-delete="class"
+              >
                 ADD TASK(S)
               </button>
-              <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#js-delete-student" data-delete="class">
+              <button
+                type="button"
+                class="btn btn-outline-danger"
+                data-toggle="modal"
+                data-target="#js-delete-student"
+                data-delete="class"
+              >
                 DELETE STUDENT(S)
               </button>
             </span>
