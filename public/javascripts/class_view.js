@@ -39,8 +39,9 @@ $(function () {
     e.preventDefault()
     console.log(`js-teacher-task-assign was just clicked`)
     // Find all selected checkboxes on DOM
-
-    // Store values of all student's UUID's that were checked
+    var boxesChecked = $('input:checked').get()
+    // Put all student UUID's selected into an array of strings
+    var studentUUIDArray = boxesChecked.map(el => $(el).data('student-uuid'))
   })
 
   // Define global variables
