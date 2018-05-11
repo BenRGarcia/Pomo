@@ -89,8 +89,8 @@ $(function () {
       // Send PUT request to add start time to task, reload page
       console.log(`Student 'start click' was accepted, now sending PUT request`)
       $.ajax({ url: '/api/task/timer/start', method: 'PUT', data: { uuid } })
-      // .then(() => window.location.reload())
-      // .catch(() => window.location.reload())
+        .then(() => window.location.reload())
+        .catch(() => window.location.reload())
     } else {
       /* do nothing */
       console.log(`Student 'start click' was IGNORED`)
