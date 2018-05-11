@@ -5,7 +5,6 @@ var isAuthenticated = require('./utils/isAuthenticated.js')
 
 // Credit coins to student
 var creditCoins = (studentUUID, coins) => {
-  console.log(`routes/task.js just received studentUUID: ${studentUUID}, coins: ${coins}`)
   return new Promise((resolve, reject) => {
     db.Student.findOne({ where: { uuid: studentUUID } })
       .then(student => resolve(student.increment('coin_count', { by: coins })))
@@ -29,11 +28,11 @@ router.route('/new')
 
 // Student starts the timer (clicks `start` button)
 router.route('/timer/start')
-  .post((req, res, next) => {
+  .put((req, res, next) => {
     // Get task uuid from req body
-    var taskUUID = req.body.taskUUID
+    var uuid = req.body.uuid
     // Update task with start time (add 1 second to accomodate DB roundtrip)
-    db.Task.update({ start_time: Date.now() + 1000 }, { where: { uuid: taskUUID } })
+    db.Task.update({ start_time: Date.now() + 1000 }, { where: { uuid } })
       .then(() => res.status(204).send())
   })
 
@@ -41,13 +40,13 @@ router.route('/timer/start')
 router.route('/timer/done')
   .put((req, res, next) => {
     // Get task uuid from req body
-    var taskUUID = req.body.taskUUID
+    var uuid = req.body.uuid
     // Find task
-    db.Task.findOne({ where: { uuid: taskUUID } })
+    db.Task.findOne({ where: { uuid } })
       // Credit coins to student associated with task
-      .then(task => creditCoins(task.student_UUID, task.coin_value))
+      .then(task => creditCoins(task.student_uuid, task.coin_value))
       // Update task with `is_done` boolean
-      .then(() => db.Task.update({ is_done: true }, { where: { uuid: taskUUID } }))
+      .then(() => db.Task.update({ is_done: true }, { where: { uuid } }))
       // Send success response to client
       .then(() => res.status(204).send())
   })
