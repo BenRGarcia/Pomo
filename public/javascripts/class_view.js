@@ -48,7 +48,6 @@ $(function () {
       var queryArray = uuidArray.map(student_uuid => {
         return { student_uuid, name, description, timer_duration, coin_value }
       })
-      console.log(`front end about to send POST to backend: `, queryArray)
       $.post('/api/task/new', { queryArray })
         .then(() => window.location.reload())
         .catch(() => window.location.reload())
@@ -107,10 +106,9 @@ $(function () {
     e.preventDefault()
     // Ignore form submission if delete button disabled
     if ($('#js-modal-delete-button').prop('disabled') === false) {
-      console.log(`Frontend is sending AJAX delete to the backend`)
       $.ajax(`/api/class/student/${student_UUID}`, { type: 'DELETE' })
         .then(() => window.location.reload())
-      // .catch(() => window.location.reload())
+        .catch(() => window.location.reload())
     } else { /* ... do nothing */ }
   })
 
