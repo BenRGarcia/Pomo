@@ -50,7 +50,7 @@ $(function () {
       var uuidArray = getStudentUUIDs()
       var name = $('#js-task-name').val().trim()
       var description = $('#js-task-description').val()
-      var timer_duration = $('#js-task-timer-duration').val()
+      var timer_duration = $('#js-task-timer-duration').val() * 60
       var coin_value = $('#js-task-coin-value').val()
 
       var queryArray = uuidArray.map(student_uuid => {
