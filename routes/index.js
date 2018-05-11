@@ -54,15 +54,18 @@ router.get('/teacher/class/:uuid/manage', isAuthenticated, (req, res, next) => {
     .then(classData => {
       className = classData.dataValues.name
       classPassword = classData.dataValues.password
+      return className
     })
-  db.Student.findAll({
-    where: { class_uuid },
-    include: [{
-      model: db.Task,
-      where: { is_done: false },
-      required: false
-    }]
-  })
+    .then(() => {
+      return db.Student.findAll({
+        where: { class_uuid },
+        include: [{
+          model: db.Task,
+          where: { is_done: false },
+          required: false
+        }]
+      })
+    })
     .then(students => res.render('classManage', { students, class_uuid, classPassword, className, layout: '/layouts/layoutTeacher' }))
     .catch(err => res.json(err))
 })
