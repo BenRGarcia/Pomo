@@ -29,4 +29,22 @@ router.route('/student/:uuid')
       .catch(() => res.status(400).send())
   })
 
+router.route('/student/:uuid/increment')
+// Handle when teacher increments student coin count
+  .put(isAuthenticated, (req, res, next) => {
+    db.Student.findOne({ where: { uuid: req.params.uuid } })
+      .then(student => student.increment('coin_count', { by: 1 }))
+      .then(() => res.status(201).send())
+      .catch(() => res.status(500).send())
+  })
+
+router.route('/student/:uuid/decrement')
+  // Handle when teacher increments student coin count
+  .put(isAuthenticated, (req, res, next) => {
+    db.Student.findOne({ where: { uuid: req.params.uuid } })
+      .then(student => student.decrement('coin_count', { by: 1 }))
+      .then(() => res.status(201).send())
+      .catch(() => res.status(500).send())
+  })
+
 module.exports = router
