@@ -20,14 +20,14 @@
         <div class="task-title">
           Task
         </div>
-        <h3>Tasks Coin Count Value: {{Tasks.coin_value}}</h3>
+        <h3 class="task-value col-m-6">Earn {{Tasks.coin_value}} Coin(s)!</h3>
         {{#if Tasks.name}}
-        <div id="task-name">
+        <div class="task-desc col-m-6" id="task-name">
           {{Tasks.name}}
         </div>
         {{/if}}
         {{#if Tasks.description}}
-        <div id="task-description">
+        <div class="task-desc-body col-m-6" id="task-description">
           {{Tasks.description}}
         </div>
         {{/if}}
