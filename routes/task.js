@@ -47,7 +47,7 @@ router.route('/timer/done')
     // Find task
     db.Task.findOne({ where: { uuid } })
       // Credit coins to student associated with task
-      // .then(task => creditCoins(task.student_UUID, task.coin_value))
+      .then(task => creditCoins(task.student_uuid, task.coin_value))
       // Update task with `is_done` boolean
       .then(() => db.Task.update({ is_done: true }, { where: { uuid } }))
       // Send success response to client
