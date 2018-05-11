@@ -55,6 +55,19 @@
                     </td>
                     {{!-- Student's total coin count --}}
                     <td>
+                      {{!-- Decrement Student Coin Count --}}
+                      <button
+                        type="button"
+                        class="btn btn-outline-warning ml-1"
+                        data-decrement-coins="student"
+                        data-student-uuid='{{uuid}}'
+                      >
+                        <i
+                          class="fas fa-minus"
+                          data-student-uuid='{{uuid}}'
+                        >
+                        </i>
+                      </button>
                       {{coin_count}}
                       {{!-- Increment Student Coin Count --}}
                       <button

@@ -11,6 +11,14 @@ $(function () {
       .catch(() => window.location.reload())
   })
 
+  $('button[data-decrement-coins=student]').on('click', e => {
+    e.preventDefault()
+    var uuid = $(e.target).data('student-uuid')
+    $.ajax({ url: `/api/class/student/${uuid}/decrement`, method: 'PUT' })
+      .then(() => window.location.reload())
+      .catch(() => window.location.reload())
+  })
+
   /**
    * Teacher assigns tasks to student(s)
    */
