@@ -1,6 +1,7 @@
 var express = require('express')
 var router = express.Router()
 var db = require('../models')
+var isAuthenticated = require('./utils/isAuthenticated.js')
 
 // Credit coins to student
 var creditCoins = (studentUUID, coins) => {
@@ -18,10 +19,13 @@ var creditCoins = (studentUUID, coins) => {
 // Teacher creates new task for student
 router.route('/new')
   // Assuming req body will be an array of task objects
-  .post((req, res, next) => {
+  .post(isAuthenticated, (req, res, next) => {
+    console.log(`\n=========\nWe just got a task bulk post request`)
+    console.log(req.body.queryArray)
     // Bulk update db
     db.Task.bulkCreate(req.body)
       .then(() => res.status(201).send())
+    res.status(200).send()
   })
 
 // Student starts the timer (clicks `start` button)
