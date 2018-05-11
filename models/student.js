@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     student_id: {
       type: DataTypes.STRING,
+      unique: true,
       allowNull: false,
       validate: { len: [1] }
     },
