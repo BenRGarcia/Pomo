@@ -8,28 +8,60 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form id="js-form-task-assign">
           <div class="form-group">
-            <label for="js-modal-delete-input" class="col-form-label">Task Name:</label>
-            <textarea class="form-control" id="task_name"></textarea>
+            <label for="js-task-name" class="col-form-label">Task Name:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="js-task-name"
+              required
+            >
+            </input>
           </div>
           <div class="form-group">
-            <label for="js-modal-delete-input" class="col-form-label">Task Description:</label>
-            <textarea class="form-control" id="task_name"  maxlength="100"></textarea>
+            <label for="js-task-description" class="col-form-label">Task Description:</label>
+            <textarea
+              class="form-control"
+              id="js-task-description"
+              maxlength="100"
+              required
+            >
+            </textarea>
           </div>
           <div class="form-group">
-            <label for="message-text" class="col-form-label">Timer Duration:</label>
-            <textarea class="form-control" id="timer_duration"></textarea>
+            <label for="js-task-timer-duration" class="col-form-label">Timer Minutes:</label>
+            <input
+              type="number"
+              min="1"
+              class="form-control"
+              id="js-task-timer-duration"
+              required
+            >
+            </input>
           </div>
           <div class="form-group">
-            <label for="message-text" class="col-form-label">Coin Value:</label>
-            <textarea class="form-control" id="coin_value"></textarea>
+            <label for="js-task-coin-value" class="col-form-label">Coin Value:</label>
+            <input
+              type="number"
+              min="0"
+              class="form-control"
+              id="js-task-coin-value"
+              required
+            >
+            </input>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-outline-success">Submit</button>
+        <button
+          id="js-form-button-submit"
+          form="js-form-task-assign"
+          type="submit"
+          class="btn btn-outline-success"
+        >
+          Assign Tasks
+        </button>
       </div>
     </div>
   </div>
