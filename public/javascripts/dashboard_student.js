@@ -70,7 +70,8 @@ $(function () {
       var recalculatedSecondsRemaining = calculateSecondsRemaining(startTime, duration)
       // Test if time has run out
       if (recalculatedSecondsRemaining <= 0) {
-        timeUpOrTaskDone()
+        // timeUpOrTaskDone()
+        timerUp()
       }
       // Convert to minutes and seconds
       var timeObj = convertToMinutesAndSeconds(recalculatedSecondsRemaining)
@@ -118,17 +119,26 @@ $(function () {
       .catch(() => window.location.reload())
   }
 
-  function timeUpOrTaskDone () {
+  function taskDone () {
     // console.log(`Time is up or 'Done' button was clicked...`)
     // console.log(`... time to clear the time interval and send PUT to backend`)
     // Clear the timer interval
     clearInterval(timerIntervalToClear)
     // Get task UUID
     var uuid = getTaskUUID()
+
     // Send PUT request
     $.ajax({ url: '/api/task/timer/done', method: 'PUT', data: { uuid } })
       .then(() => window.location.reload())
       .catch(() => window.location.reload())
+  }
+
+  function timerUp () {
+    clearInterval(timerIntervalToClear)
+    $('.student-dash-timer').html('5 minute break!')
+    setTimeout(startTimer, 10000)
+
+    // startTimer()
   }
 
   // Event listener for timer start
@@ -148,7 +158,7 @@ $(function () {
     var isTaskAssigned = getTaskUUID() !== ''
     if (timerIsStarted() && isTaskAssigned) {
       // console.log(`Are both 'timerIsStarted() && isTaskAssigned'? true`)
-      timeUpOrTaskDone()
+      taskDone()
     } else { /* do nothing */ /* console.log(`Student 'DONE click' was IGNORED`) */ }
   })
 })
