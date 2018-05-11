@@ -29,11 +29,11 @@ router.route('/new')
 
 // Student starts the timer (clicks `start` button)
 router.route('/timer/start')
-  .post((req, res, next) => {
+  .put((req, res, next) => {
     // Get task uuid from req body
-    var taskUUID = req.body.taskUUID
+    var uuid = req.body.uuid
     // Update task with start time (add 1 second to accomodate DB roundtrip)
-    db.Task.update({ start_time: Date.now() + 1000 }, { where: { uuid: taskUUID } })
+    db.Task.update({ start_time: Date.now() + 1000 }, { where: { uuid } })
       .then(() => res.status(204).send())
   })
 
