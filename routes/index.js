@@ -32,7 +32,7 @@ router.get('/teacher/signup', csrfProtection, (req, res, next) => {
 })
 
 // Class store page (hard coded future-feature)
-router.get('/teacher/store', (req, res, next) => res.render('store', { layout: '/layouts/layoutTeacher' }))
+router.get('/teacher/store', (req, res, next) => res.render('store', { layout: '/layouts/layoutStudent' }))
 
 /**
  * Dynamic pages
