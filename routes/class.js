@@ -38,4 +38,13 @@ router.route('/student/:uuid/increment')
       .catch(() => res.status(500).send())
   })
 
+router.route('/student/:uuid/decrement')
+  // Handle when teacher increments student coin count
+  .put(isAuthenticated, (req, res, next) => {
+    db.Student.findOne({ where: { uuid: req.params.uuid } })
+      .then(student => student.decrement('coin_count', { by: 1 }))
+      .then(() => res.status(201).send())
+      .catch(() => res.status(500).send())
+  })
+
 module.exports = router
