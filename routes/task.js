@@ -5,6 +5,7 @@ var isAuthenticated = require('./utils/isAuthenticated.js')
 
 // Credit coins to student
 var creditCoins = (studentUUID, coins) => {
+  console.log(`routes/task.js just received studentUUID: ${studentUUID}, coins: ${coins}`)
   return new Promise((resolve, reject) => {
     db.Student.findOne({ where: { uuid: studentUUID } })
       .then(student => resolve(student.increment('coin_count', { by: coins })))
