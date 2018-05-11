@@ -28,6 +28,8 @@ $(function () {
         completeTask()
       }
     }, 1000)
+  } else {
+    console.log(`Timer is not yet started`)
   }
 
   // Returns number of seconds remaining
