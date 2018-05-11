@@ -54,15 +54,18 @@ router.get('/teacher/class/:uuid/manage', isAuthenticated, (req, res, next) => {
     .then(classData => {
       className = classData.dataValues.name
       classPassword = classData.dataValues.password
+      return className
     })
-  db.Student.findAll({
-    where: { class_uuid },
-    include: [{
-      model: db.Task,
-      where: { is_done: false },
-      required: false
-    }]
-  })
+    .then(() => {
+      return db.Student.findAll({
+        where: { class_uuid },
+        include: [{
+          model: db.Task,
+          where: { is_done: false },
+          required: false
+        }]
+      })
+    })
     .then(students => res.render('classManage', { students, class_uuid, classPassword, className, layout: '/layouts/layoutTeacher' }))
     .catch(err => res.json(err))
 })
@@ -70,8 +73,14 @@ router.get('/teacher/class/:uuid/manage', isAuthenticated, (req, res, next) => {
 // Student dashboard
 router.get('/student/:uuid/dashboard', (req, res, next) => {
   var uuid = req.params.uuid
-  db.Task.findAll({ where: { student_uuid: uuid, is_done: false } })
-    .then(Tasks => res.render('studentDashboard', { Tasks: Tasks[0], layout: '/layouts/layoutStudent' }))
+  var coin_count
+  db.Student.findOne({ where: { uuid: uuid } })
+    .then(student => {
+      coin_count = student.coin_count
+      return coin_count
+    })
+    .then(() => db.Task.findAll({ where: { student_uuid: uuid, is_done: false } }))
+    .then(Tasks => res.render('studentDashboard', { Tasks: Tasks[0], coins: coin_count, layout: '/layouts/layoutStudent' }))
     .catch(err => res.json(err))
 })
 

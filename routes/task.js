@@ -31,8 +31,8 @@ router.route('/timer/start')
   .post((req, res, next) => {
     // Get task uuid from req body
     var taskUUID = req.body.taskUUID
-    // Update task with start time
-    db.Task.update({ start_time: Date.now() }, { where: { uuid: taskUUID } })
+    // Update task with start time (add 1 second to accomodate DB roundtrip)
+    db.Task.update({ start_time: Date.now() + 1000 }, { where: { uuid: taskUUID } })
       .then(() => res.status(204).send())
   })
 
