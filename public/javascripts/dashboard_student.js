@@ -1,5 +1,53 @@
 $(function () {
-  console.log(`Timer duration: ${$('#js-timer-raw-data').data('duration')}`)
+  // Timer can have 3 states:
+  // 1) Timer has not yet started (state change when student hits 'start button', begin countDown)
+  // 2) Timer is currently counting down (state change when a) student hits 'done', b) timer gets to 0
+  // Return true or false if the timer has been started
+  var timerIsStarted = () => {
+    console.log(`The current value of '!!$('#js-timer-raw-data').data('start-time')' is: ${!!$('#js-timer-raw-data').data('start-time')}`)
+    return !!$('#js-timer-raw-data').data('start-time')
+  }
+
+  var updateDOMTimer = ({ minutes, seconds }) => {
+    console.log(`updateDOMTimer() is trying to update the DOM with ${minutes}:${seconds}`)
+    $('#js-timer-minutes').text(minutes)
+    $('#js-timer-seconds').text(seconds)
+  }
+
+  var convertToMinutesAndSeconds = (secondsDuration) => {
+    console.log(`convertToMinutesAndDuration() just received seconds ${secondsDuration}... `)
+    var minutes = Math.floor(secondsDuration / 60)
+    var seconds = Math.floor(secondsDuration % 60)
+    console.log(`and converted them to ${minutes} minutes and ${seconds} seconds`)
+    return { minutes, seconds }
+  }
+
+  var formatSeconds = (seconds) => seconds.toString().padStart(2, '0')
+
+  // Call function that handles timer on page load
+  timer()
+  // After page loads, render to DOM the time duration to spans if timer state is unstarted
+  function timer () {
+    console.log(`Timer duration: ${$('#js-timer-raw-data').data('duration')}`)
+    // Test if timer is started
+    if (timerIsStarted()) {
+      // Handle if timer is currently counting down
+      console.log(`Timer state is: 'Currently counting down'`)
+    } else {
+      // Handle if timer is not yet started
+      console.log(`Timer state is: 'Not yet counting down'`)
+      // Render timer duration to the DOM
+      // 1) Get duration attribute from hidden div
+      var duration = $('#js-timer-raw-data').data('duration')
+      // 2) Convert seconds of duration to minutes
+      var timeObj = convertToMinutesAndSeconds(duration)
+      console.log(`timer() has received timeObj: { minutes: ${timeObj.minutes}, seconds: ${timeObj.seconds} }`)
+      // 3) Format seconds data for edge cases (pad with '0' if < 10 seconds)
+      if (timeObj.seconds < 10) timeObj.seconds = formatSeconds(timeObj.seconds)
+      // 4) Update DOM with timer data
+      updateDOMTimer(timeObj)
+    }
+  }
 // // Event listener for timer start
 //   $('body').on('click', '#js-timer-start', e => startTask())
 
