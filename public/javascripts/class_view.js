@@ -1,47 +1,55 @@
-/*
-Per Davis, Send POST requests for new students to the backend in objects made with something like this:
-[
-  {
-    "name": "english hw",
-    "timer_duration": 1200,
-    "coin_value": 25,
-    "student_uuid": 1
-  },
-  {
-    "name": "english hw",
-    "timer_duration": 1200,
-    "coin_value": 25,
-    "student_uuid": 2
-  }
-]
-
-      var studentIds = [1, 2]
-      var queryArray = []
-
-      for (var i = 0; i < studentIds.length; i++) {
-        var taskObj = {
-          name: 'english hw',
-          timer_duration: 1200,
-          coin_value: 25,
-          student_uuid: studentIds[i]
-        }
-        queryArray.push(taskObj)
-      }
- */
-
 $(function () {
   /**
    * Teacher assigns tasks to student(s)
    */
 
-  // Teacher clicks on 'ADD TASK' button
-  $('#js-teacher-task-assign').on('click', e => {
-    e.preventDefault()
-    console.log(`js-teacher-task-assign was just clicked`)
-  })
-  // Find all selected checkboxes on DOM
+  // Helper function to determine true/false if at least one box is checked
+  var anyBoxesChecked = () => $('input:checked').get().length > 0
 
-  // Store values of all student's UUID's that were checked
+  function getStudentUUIDs () {
+    // Find all selected checkboxes on DOM
+    var boxesChecked = $('input:checked').get()
+    // Put all student UUID's selected into an array of strings
+    var studentUUIDArray = boxesChecked.map(el => $(el).data('student-uuid'))
+    return studentUUIDArray
+  }
+
+  $('input:checkbox').on('click', e => {
+    if (anyBoxesChecked) {
+      $('#js-teacher-task-assign').attr('disabled', false)
+    } else {
+      $('#js-teacher-task-assign').attr('disabled', true)
+    }
+  })
+
+  $('#js-form-task-assign').on('submit', e => {
+    e.preventDefault()
+
+    // Screen out tasks without selected students
+    if (anyBoxesChecked) {
+      var uuidArray = getStudentUUIDs()
+      var name = $('#js-task-name').val().trim()
+      var description = $('#js-task-description').val()
+      var timer_duration = $('#js-task-timer-duration').val()
+      var coin_value = $('#js-task-coin-value').val()
+
+      var queryArray = uuidArray.map(student_uuid => {
+        return { student_uuid, name, description, timer_duration, coin_value }
+      })
+      console.log(`front end about to send POST to backend: `, queryArray)
+      $.post('/api/task/new', { queryArray })
+        .then(() => window.location.reload())
+        .catch(() => window.location.reload())
+    }
+  })
+
+  // Clear modal when closed
+  $('#js-modal-task-assignment').on('hidden.bs.modal', () => {
+    $('#js-task-name').val('')
+    $('#js-task-description').val('')
+    $('#js-task-timer-duration').val('')
+    $('#js-task-coin-value').val('')
+  })
 
   // Define global variables
   var student_UUID
@@ -126,145 +134,4 @@ $(function () {
         .catch(() => window.location.reload())
     }
   })
-/**
- * Handle when teacher is viewing class
- */
-
-  // grab selected students and assign task, time duration, and coin value
-  // $('body').on('submit', e => {
-  //   e.preventDefault()
-  //   // get the ids of the students
-  //   var studentArr = []
-  //   var students = $('checkbox[data-add=student]')
-  //   var student_uuid = $(e.target).data('student_uuid')
-
-  //   students.forEach(element => {
-  //     if (student_uuid.checked = true) {
-  //       studentArr.push(student_uuid)
-  //     }
-  //   })
-
-  //   $('#js-modal-task-assignment').modal('show') // has form input and submit button
-
-  //   var taskAssignment = {task_name, timer_duration, coin_value}
-
-  //   $('#js-modal-task-assignment').on('submit', 'form', e => {
-  //     e.preventDefault()
-
-  //     var task_name = $('#task_name').val().trim()
-  //     var timer_duration = $('#timer_duration').val().trim()
-  //     var coin_value = $('#coin_value').val().trim()
-
-  //     $.post('/api/task/', taskAssignment)
-  //       .then(
-  //         function () {
-  //           console.log('assigned task to', studentArr[element])
-  //           window.location.reload()
-  //         }
-  //       )
-  //       .catch(err => console.error(err.message))
-  //   })
-  //   // clear checkboxes and modal values
-  //   students.empty()
-  //   var task_name = $('#task_name').val('')
-  //   var timer_duration = $('#timer_duration').val('')
-  //   var coin_value = $('#coin_value').val('')
-  // })
-
-  // // NEED HELP WITH ADDING AND DELETING COINS!
-
-  // // add coins
-  // $('body').on('click', 'span[data-coin-adjust=coin]', e => {
-  //   // get the attribute of each button
-  //   var increment_coin = $(e.target).data('increment_coin')
-  //   var student_uuid = $(e.target).data('student_uuid')
-  //   var coin_amount = increment_coin.val()
-
-  //   var new_coin_value = {
-  //     coin_count: coin_amount++
-  //   }
-
-  //   $.put('/api/student/add' + student_uuid, new_coin_value)
-  //     .then(
-  //       e => {
-  //         window.location.reload()
-  //       }
-  //     )
-  // })
-
-  // // **delete coin from each student
-  // $('body').on('click', 'span[data-coin-adjust=coin]', e => {
-  //   // get the attribute of each button
-  //   var decrement_coin = $(e.target).data('decrement_coin')
-  //   var student_uuid = $(e.target).data('student_uuid')
-  //   var coin_amount = decrement_coin.val()
-
-  //   var new_coin_value = {
-  //     coin_count: coin_amount--
-  //   }
-  //   $.put('/api/student/add' + student_uuid, new_coin_value)
-  //     .then(
-  //       e => {
-  //         window.location.reload()
-  //       }
-  //     )
-  // })
-
-  // // add student to class
-  // $('body').on('click', '#js-add-student', e => {
-  //   $('#js-modal-add-student').modal('show')
-
-  //   $('body').on('submit', '#js-modal-add-student', e => {
-  //     e.preventDefault()
-
-  //     var newStudent_Name = $('#new_student').val().trim()
-  //     var coin_count = $('#coin_count').val().trim()
-
-  //     var addNewStudent = {
-  //       name: newStudent_Name,
-  //       coin_count: coin_count
-  //     }
-
-  //     $.post('/api/students/', addNewStudent)
-  //       .then(
-  //         function () {
-  //           console.log('new student add', newStudent_Name)
-  //           window.location.reload()
-  //         }
-  //       )
-  //       .catch(err => console.error(err.message))
-  //     $('#new_student').val('')
-  //     $('#coint_count').val('')
-  //     $('#js-modal-add-student').modal('hide')
-  //   })
-  // })
-
-  // // delete student from class
-  // $('body').on('click', 'span[data-delete=student]', e => {
-  //   // get the name of the class to insert into modal
-  //   var student_uuid = $(e.target).data('student_uuid') // student_uuid: adfgdfg-45465u-sfgb
-  //   var student_name = $(e.target).data('student_name') // 'John Smith'
-
-  //   $('#js-modal-delete-student').modal('show') // has form input and submit button
-
-  //   var userInput = $('#js-modal-delete-input').val()
-
-  //   if (userInput === student_name) {
-  //     $('#js-modal-delete-student').prop('disabled', false)
-  //   } else {
-  //     $('#js-modal-delete-student').prop('disabled', true)
-  //   }
-
-  //   $('#js-modal-delete-student').on('submit', 'form', e => {
-  //     e.preventDefault()
-  //     $.ajax('/api/student/' + student_uuid, {
-  //       type: 'DELETE'
-  //     }).then(
-  //       function () {
-  //         console.log('deleted class', class_uuid)
-  //         window.location.reload()
-  //       }
-  //     )
-  //   })
-  // })
 })
