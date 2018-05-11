@@ -114,7 +114,10 @@ $(function () {
     console.log(`... time to clear the time interval and send PUT to backend`)
     // Clear the timer interval
     clearInterval(timerIntervalToClear)
+    // Get task UUID
+    var uuid = getTaskUUID()
     // Send PUT request
+    $.ajax({ url: '/api/task/timer/done', method: 'PUT', data: { uuid } })
   }
 
   // Event listener for timer start

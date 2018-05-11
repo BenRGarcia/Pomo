@@ -41,13 +41,15 @@ router.route('/timer/start')
 router.route('/timer/done')
   .put((req, res, next) => {
     // Get task uuid from req body
-    var taskUUID = req.body.taskUUID
+    var uuid = req.body.uuid
+    console.log(`backend just received PUT request to set timer to DONE, task uuid: ${uuid}`)
+    // res.status(200).send()
     // Find task
-    db.Task.findOne({ where: { uuid: taskUUID } })
+    db.Task.findOne({ where: { uuid } })
       // Credit coins to student associated with task
-      .then(task => creditCoins(task.student_UUID, task.coin_value))
+      // .then(task => creditCoins(task.student_UUID, task.coin_value))
       // Update task with `is_done` boolean
-      .then(() => db.Task.update({ is_done: true }, { where: { uuid: taskUUID } }))
+      .then(() => db.Task.update({ is_done: true }, { where: { uuid } }))
       // Send success response to client
       .then(() => res.status(204).send())
   })
