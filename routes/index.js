@@ -67,24 +67,17 @@ router.get('/teacher/class/:uuid/manage', isAuthenticated, (req, res, next) => {
     .catch(err => res.json(err))
 })
 
-// Test endpoint to see db query val (DELETE)
-router.get('/student/:uuid/dashboard/test', (req, res, next) => {
+// Student dashboard
+router.get('/student/:uuid/dashboard', (req, res, next) => {
   var uuid = req.params.uuid
   var coin_count
   db.Student.findOne({ where: { uuid: uuid } })
     .then(student => {
       coin_count = student.coin_count
-      res.json(coin_count)
+      return coin_count
     })
-  // db.Task.findAll({ where: { student_uuid: uuid, is_done: false } })
-  //   .then(resp => res.json(resp))
-})
-
-// Student dashboard
-router.get('/student/:uuid/dashboard', (req, res, next) => {
-  var uuid = req.params.uuid
-  db.Task.findAll({ where: { student_uuid: uuid, is_done: false } })
-    .then(Tasks => res.render('studentDashboard', { Tasks: Tasks[0], layout: '/layouts/layoutStudent' }))
+    .then(() => db.Task.findAll({ where: { student_uuid: uuid, is_done: false } }))
+    .then(Tasks => res.render('studentDashboard', { Tasks: Tasks[0], coins: coin_count, layout: '/layouts/layoutStudent' }))
     .catch(err => res.json(err))
 })
 
