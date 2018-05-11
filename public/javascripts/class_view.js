@@ -1,14 +1,16 @@
 /*
 Per Davis, Send POST requests for new students to the backend in objects made with something like this:
-[
+req.body = [
   {
     "name": "english hw",
+    "description": "stuff..."
     "timer_duration": 1200,
     "coin_value": 25,
     "student_uuid": 1
   },
   {
     "name": "english hw",
+    "description": "stuff..."
     "timer_duration": 1200,
     "coin_value": 25,
     "student_uuid": 2
@@ -37,14 +39,22 @@ $(function () {
   var anyBoxesChecked = () => $('input:checked').get().length > 0
 
   // Teacher clicks on 'ADD TASK' button
-  $('#js-teacher-task-assign').on('click', e => {
-    e.preventDefault()
-    console.log(`js-teacher-task-assign was just clicked`)
+  // $('#js-teacher-task-assign').on('click', e => {
+  //   e.preventDefault()
+  //   console.log(`js-teacher-task-assign was just clicked`)
+  //   // Find all selected checkboxes on DOM
+  //   var boxesChecked = $('input:checked').get()
+  //   // Put all student UUID's selected into an array of strings
+  //   var studentUUIDArray = boxesChecked.map(el => $(el).data('student-uuid'))
+  // })
+
+  function getStudentUUIDs () {
     // Find all selected checkboxes on DOM
     var boxesChecked = $('input:checked').get()
     // Put all student UUID's selected into an array of strings
     var studentUUIDArray = boxesChecked.map(el => $(el).data('student-uuid'))
-  })
+    return studentUUIDArray
+  }
 
   $('input:checkbox').on('click', e => {
     if (anyBoxesChecked) {
@@ -52,6 +62,41 @@ $(function () {
     } else {
       $('#js-teacher-task-assign').attr('disabled', true)
     }
+  })
+
+  $('#js-form-task-assign').on('submit', e => {
+    e.preventDefault()
+
+    // Screen out tasks without selected students
+    if (anyBoxesChecked) {
+      var uuidArray = getStudentUUIDs()
+      var name = $('#js-task-name').val().trim()
+      var description = $('#js-task-description').val()
+      var timer_duration = $('#js-task-timer-duration').val()
+      var coin_value = $('#js-task-coin-value').val()
+
+      // var queryObj = {}
+
+      // for (var i = 0; i < uuidArray.length; i++) {
+      //   queryObj[i] = { name, description, timer_duration, coin_value }
+      // }
+
+      var queryArray = uuidArray.map(student_uuid => {
+        return { student_uuid, name, description, timer_duration, coin_value }
+      })
+      console.log(`front end about to send POST to backend: `, queryArray)
+      $.post('/api/task/new', { queryArray })
+      // .then(() => window.location.reload())
+      // .catch(() => window.location.reload())
+    }
+  })
+
+  // Clear modal when closed
+  $('#js-modal-task-assignment').on('hidden.bs.modal', () => {
+    $('#js-task-name').val('')
+    $('#js-task-description').val('')
+    $('#js-task-timer-duration').val('')
+    $('#js-task-coin-value').val('')
   })
 
   // Define global variables
@@ -180,5 +225,6 @@ $(function () {
   //   var task_name = $('#task_name').val('')
   //   var timer_duration = $('#timer_duration').val('')
   //   var coin_value = $('#coin_value').val('')
+
   // })
 })
