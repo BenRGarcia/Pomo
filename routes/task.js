@@ -5,7 +5,6 @@ var isAuthenticated = require('./utils/isAuthenticated.js')
 
 // Credit coins to student
 var creditCoins = (studentUUID, coins) => {
-  console.log(`routes/task.js just received studentUUID: ${studentUUID}, coins: ${coins}`)
   return new Promise((resolve, reject) => {
     db.Student.findOne({ where: { uuid: studentUUID } })
       .then(student => resolve(student.increment('coin_count', { by: coins })))
@@ -42,8 +41,6 @@ router.route('/timer/done')
   .put((req, res, next) => {
     // Get task uuid from req body
     var uuid = req.body.uuid
-    console.log(`backend just received PUT request to set timer to DONE, task uuid: ${uuid}`)
-    // res.status(200).send()
     // Find task
     db.Task.findOne({ where: { uuid } })
       // Credit coins to student associated with task
