@@ -33,6 +33,8 @@ $(function () {
   /**
    * Teacher assigns tasks to student(s)
    */
+  // Helper function to determine true/false if at least one box is checked
+  var anyBoxesChecked = () => $('input:checked').get().length > 0
 
   // Teacher clicks on 'ADD TASK' button
   $('#js-teacher-task-assign').on('click', e => {
@@ -42,6 +44,14 @@ $(function () {
     var boxesChecked = $('input:checked').get()
     // Put all student UUID's selected into an array of strings
     var studentUUIDArray = boxesChecked.map(el => $(el).data('student-uuid'))
+  })
+
+  $('input:checkbox').on('click', e => {
+    if (anyBoxesChecked) {
+      $('#js-teacher-task-assign').attr('disabled', false)
+    } else {
+      $('#js-teacher-task-assign').attr('disabled', true)
+    }
   })
 
   // Define global variables
