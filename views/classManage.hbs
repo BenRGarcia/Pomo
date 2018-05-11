@@ -20,7 +20,7 @@
   <div class="row">
     <div class="col-sm-12">
       <div class="card shadow">
-        <div class="card-header">Assign Task    |    Add Students    |    Add Task    |    Add Coins</div>
+        <div class="card-header">Assign Task    |    Add Students    |     Add Coins</div>
         <div class="card-body">
           <div class="mb-4">
             <table class="table table-striped">
@@ -31,6 +31,7 @@
                   <th scope="col">Login Id</th>
                   <th scope="col">Task Status</th>
                   <th scope="col">Coin Count</th>
+                  <th scope="col">Delete Student</th>
                 </tr>
               </thead>
               <tbody>
@@ -78,6 +79,18 @@
                       >
                         <i
                           class="fas fa-plus"
+                          data-student-uuid='{{uuid}}'
+                        >
+                        </i>
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-outline-warning ml-1"
+                        data-increment-coins="student"
+                        data-student-uuid='{{uuid}}'
+                      >
+                        <i
+                          class="fas fa-minus"
                           data-student-uuid='{{uuid}}'
                         >
                         </i>
