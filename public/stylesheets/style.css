@@ -1,4 +1,10 @@
 @import './bootstrap.min.css';
+.fill-center {
+  text-align: center;
+  /* width: 850px;
+  max-width: 100%;
+  height: 635px; */
+}
 
 .coin-align {
   width: 50%;
