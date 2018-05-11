@@ -2,6 +2,11 @@ $(function () {
   // Timer can have 3 states:
   // 1) Timer has not yet started (state change when student hits 'start button', begin countDown)
   // 2) Timer is currently counting down (state change when a) student hits 'done', b) timer gets to 0
+
+  /**
+   * Helper functions for timer
+   */
+
   // Return true or false if the timer has been started
   var timerIsStarted = () => {
     console.log(`The current value of '!!$('#js-timer-raw-data').data('start-time')' is: ${!!$('#js-timer-raw-data').data('start-time')}`)
@@ -24,6 +29,10 @@ $(function () {
 
   var formatSeconds = (seconds) => seconds.toString().padStart(2, '0')
 
+  /**
+   * Timer handling
+   */
+
   var handleUnstartedTimer = () => {
     console.log(`handleUnstartedTimer() was just called`)
     // 1) Get duration attribute from hidden div
@@ -38,7 +47,7 @@ $(function () {
   }
 
   var handleStartedTimer = () => {
-    console.log(`handleStartedTimer() was just called`)
+    console.log(`timer should be counting down now -- handleStartedTimer() was just called`)
   }
 
   // After page loads, render to DOM the time duration to spans if timer state is unstarted
@@ -56,8 +65,25 @@ $(function () {
     }
   }
 
+  /**
+   * Timer handling initialization
+   */
+
   // Call function that handles timer on page load
   timerHandler()
+
+  /**
+   * Event listeners
+   */
+
+  // Event listener for timer start
+  $('body').on('click', '#js-timer-start', e => {
+    console.log(`Student just clicked the start button`)
+    // Screen out if timer is already started
+    if (!timerIsStarted()) {
+      // Send put request to add start time to task
+    } else { /* do nothing */ }
+  })
 
 // // Event listener for timer start
 //   $('body').on('click', '#js-timer-start', e => startTask())
