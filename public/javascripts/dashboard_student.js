@@ -1,7 +1,9 @@
 $(function () {
-  // Timer can have 3 states:
-  // 1) Timer has not yet started (state change when student hits 'start button', begin countDown)
-  // 2) Timer is currently counting down (state change when a) student hits 'done', b) timer gets to 0
+  /**
+   * Global variables
+   */
+
+  var timerIntervalToClear
 
   /**
    * Helper functions for timer
@@ -23,8 +25,15 @@ $(function () {
     console.log(`convertToMinutesAndDuration() just received seconds ${secondsDuration}... `)
     var minutes = Math.floor(secondsDuration / 60)
     var seconds = Math.floor(secondsDuration % 60)
-    console.log(`and converted them to ${minutes} minutes and ${seconds} seconds`)
+    console.log(`...and converted them to ${minutes} minutes and ${seconds} seconds`)
     return { minutes, seconds }
+  }
+
+  var calculateSecondsRemaining = (unixStartTime, duration) => {
+    console.log(`calculateSecondsRemaining() was just called`)
+    var secondsPassed = (Date.now() - unixStartTime) / 1000
+    console.log(`${Math.floor(secondsPassed)} seconds have passed since the timer has started`)
+    return Math.floor(duration - secondsPassed)
   }
 
   var formatSeconds = (seconds) => seconds.toString().padStart(2, '0')
@@ -50,6 +59,17 @@ $(function () {
 
   var handleStartedTimer = () => {
     console.log(`timer should be counting down now -- handleStartedTimer() was just called`)
+    // Get start time and timer duration
+    var startTime = $('#js-timer-raw-data').data('start-time')
+    var duration = $('#js-timer-raw-data').data('duration')
+    console.log(`the attributes 'data-start-time' is ${startTime} and 'data-duration' ${duration}`)
+    // Calculate seconds remaining
+    var secondsRemaining = calculateSecondsRemaining(startTime, duration)
+    console.log(`There are ${secondsRemaining} seconds remaining until the timer hits 0`)
+    // Test if time has run out
+    if (secondsRemaining <= 0) {
+      timeUpOrTaskDone()
+    }
   }
 
   // After page loads, render to DOM the time duration to spans if timer state is unstarted
@@ -75,26 +95,47 @@ $(function () {
   timerHandler()
 
   /**
-   * Event listeners
+   * Event listeners & Ajax calls
    */
+
+  function startTimer () {
+    // Get task UUID
+    var uuid = getTaskUUID()
+    console.log(`taskUUID was found to be: ${uuid}`)
+    // Send PUT request to add start time to task, reload page
+    console.log(`Student 'start click' was accepted, now sending PUT request`)
+    $.ajax({ url: '/api/task/timer/start', method: 'PUT', data: { uuid } })
+      .then(() => window.location.reload())
+      .catch(() => window.location.reload())
+  }
+
+  function timeUpOrTaskDone () {
+    console.log(`Time is up or 'Done' button was clicked...`)
+    console.log(`... time to clear the time interval and send PUT to backend`)
+    // Clear the timer interval
+    clearInterval(timerIntervalToClear)
+    // Send PUT request
+  }
 
   // Event listener for timer start
   $('body').on('click', '#js-timer-start', e => {
     console.log(`Student just clicked the start button`)
-    // Screen out if timer is already started
-    if (!timerIsStarted()) {
-      // Get task UUID
-      var uuid = getTaskUUID()
-      console.log(`taskUUID was found to be: ${uuid}`)
-      // Send PUT request to add start time to task, reload page
-      console.log(`Student 'start click' was accepted, now sending PUT request`)
-      $.ajax({ url: '/api/task/timer/start', method: 'PUT', data: { uuid } })
-        .then(() => window.location.reload())
-        .catch(() => window.location.reload())
-    } else {
-      /* do nothing */
-      console.log(`Student 'start click' was IGNORED`)
-    }
+    // Screen out if timer is already started or no task assigned
+    var isTaskAssigned = getTaskUUID() !== ''
+    console.log(`isTaskAssigned? ${isTaskAssigned}`)
+    if (!timerIsStarted() || !isTaskAssigned) {
+      startTimer()
+    } else { /* do nothing */ console.log(`Student 'start click' was IGNORED`) }
+  })
+
+  // Event listener for task 'DONE'
+  $('body').on('click', '#js-timer-done', e => {
+    // Screen out if timer is not started or no task assigned
+    var isTaskAssigned = getTaskUUID() !== ''
+    if (timerIsStarted() && isTaskAssigned) {
+      console.log(`Are both 'timerIsStarted() && isTaskAssigned'? true`)
+      timeUpOrTaskDone()
+    } else { /* do nothing */ console.log(`Student 'DONE click' was IGNORED`) }
   })
 
 // // Event listener for timer start
