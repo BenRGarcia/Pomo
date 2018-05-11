@@ -20,8 +20,6 @@ var creditCoins = (studentUUID, coins) => {
 router.route('/new')
   // Assuming req body will be an array of task objects
   .post(isAuthenticated, (req, res, next) => {
-    console.log(`\n=========\nWe just got a task bulk post request`)
-    console.log(req.body.queryArray)
     // Bulk update db
     db.Task.bulkCreate(req.body.queryArray)
       .then(() => res.status(201).send())
