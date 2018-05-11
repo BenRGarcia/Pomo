@@ -29,6 +29,8 @@ $(function () {
 
   var formatSeconds = (seconds) => seconds.toString().padStart(2, '0')
 
+  var getTaskUUID = () => $('#js-timer-raw-data').data('uuid')
+
   /**
    * Timer handling
    */
@@ -81,8 +83,18 @@ $(function () {
     console.log(`Student just clicked the start button`)
     // Screen out if timer is already started
     if (!timerIsStarted()) {
-      // Send put request to add start time to task
-    } else { /* do nothing */ }
+      // Get task UUID
+      var uuid = getTaskUUID()
+      console.log(`taskUUID was found to be: ${uuid}`)
+      // Send PUT request to add start time to task, reload page
+      console.log(`Student 'start click' was accepted, now sending PUT request`)
+      $.ajax({ url: '/api/task/timer/start', method: 'PUT', data: { uuid } })
+      // .then(() => window.location.reload())
+      // .catch(() => window.location.reload())
+    } else {
+      /* do nothing */
+      console.log(`Student 'start click' was IGNORED`)
+    }
   })
 
 // // Event listener for timer start
