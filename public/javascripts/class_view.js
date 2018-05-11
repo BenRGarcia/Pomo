@@ -1,52 +1,10 @@
-/*
-Per Davis, Send POST requests for new students to the backend in objects made with something like this:
-req.body = [
-  {
-    "name": "english hw",
-    "description": "stuff..."
-    "timer_duration": 1200,
-    "coin_value": 25,
-    "student_uuid": 1
-  },
-  {
-    "name": "english hw",
-    "description": "stuff..."
-    "timer_duration": 1200,
-    "coin_value": 25,
-    "student_uuid": 2
-  }
-]
-
-      var studentIds = [1, 2]
-      var queryArray = []
-
-      for (var i = 0; i < studentIds.length; i++) {
-        var taskObj = {
-          name: 'english hw',
-          timer_duration: 1200,
-          coin_value: 25,
-          student_uuid: studentIds[i]
-        }
-        queryArray.push(taskObj)
-      }
- */
-
 $(function () {
   /**
    * Teacher assigns tasks to student(s)
    */
+
   // Helper function to determine true/false if at least one box is checked
   var anyBoxesChecked = () => $('input:checked').get().length > 0
-
-  // Teacher clicks on 'ADD TASK' button
-  // $('#js-teacher-task-assign').on('click', e => {
-  //   e.preventDefault()
-  //   console.log(`js-teacher-task-assign was just clicked`)
-  //   // Find all selected checkboxes on DOM
-  //   var boxesChecked = $('input:checked').get()
-  //   // Put all student UUID's selected into an array of strings
-  //   var studentUUIDArray = boxesChecked.map(el => $(el).data('student-uuid'))
-  // })
 
   function getStudentUUIDs () {
     // Find all selected checkboxes on DOM
@@ -75,19 +33,13 @@ $(function () {
       var timer_duration = $('#js-task-timer-duration').val()
       var coin_value = $('#js-task-coin-value').val()
 
-      // var queryObj = {}
-
-      // for (var i = 0; i < uuidArray.length; i++) {
-      //   queryObj[i] = { name, description, timer_duration, coin_value }
-      // }
-
       var queryArray = uuidArray.map(student_uuid => {
         return { student_uuid, name, description, timer_duration, coin_value }
       })
       console.log(`front end about to send POST to backend: `, queryArray)
       $.post('/api/task/new', { queryArray })
-      // .then(() => window.location.reload())
-      // .catch(() => window.location.reload())
+        .then(() => window.location.reload())
+        .catch(() => window.location.reload())
     }
   })
 
@@ -182,49 +134,4 @@ $(function () {
         .catch(() => window.location.reload())
     }
   })
-/**
- * Handle when teacher is viewing class
- */
-
-  // grab selected students and assign task, time duration, and coin value
-  // $('body').on('submit', e => {
-  //   e.preventDefault()
-  //   // get the ids of the students
-  //   var studentArr = []
-  //   var students = $('checkbox[data-add=student]')
-  //   var student_uuid = $(e.target).data('student_uuid')
-
-  //   students.forEach(element => {
-  //     if (student_uuid.checked = true) {
-  //       studentArr.push(student_uuid)
-  //     }
-  //   })
-
-  //   $('#js-modal-task-assignment').modal('show') // has form input and submit button
-
-  //   var taskAssignment = {task_name, timer_duration, coin_value}
-
-  //   $('#js-modal-task-assignment').on('submit', 'form', e => {
-  //     e.preventDefault()
-
-  //     var task_name = $('#task_name').val().trim()
-  //     var timer_duration = $('#timer_duration').val().trim()
-  //     var coin_value = $('#coin_value').val().trim()
-
-  //     $.post('/api/task/', taskAssignment)
-  //       .then(
-  //         function () {
-  //           console.log('assigned task to', studentArr[element])
-  //           window.location.reload()
-  //         }
-  //       )
-  //       .catch(err => console.error(err.message))
-  //   })
-  //   // clear checkboxes and modal values
-  //   students.empty()
-  //   var task_name = $('#task_name').val('')
-  //   var timer_duration = $('#timer_duration').val('')
-  //   var coin_value = $('#coin_value').val('')
-
-  // })
 })
