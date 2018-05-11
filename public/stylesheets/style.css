@@ -1,4 +1,21 @@
-@import url(./bootstrap.min.css);
+@import './bootstrap.min.css';
+
+
+.pomo-head-text {
+  font-family: Skranji;
+  color: #FFFFFF;
+}
+
+.pomo-logo-index {
+  width: 50px;
+  height: 50px;
+}
+
+.pomo-logo {
+  width: 600px;
+  height: 600px;;  
+}
+
 .student-body {
   background: #9ABF17; }
 

@@ -1,3 +1,6 @@
+
+  {{> studentDashboardHeader }}
+  
 <div 
   hidden 
   aria-hidden='true' 
@@ -8,12 +11,6 @@
 >
 </div>
 
-<h3>Student's Coin Count: {{coins}}</h3>
-<h3>Tasks Coin Count Value: {{Tasks.coin_value}}</h3>
-
-<div class="row">
-  {{> studentDashboardHeader }}
-</div>
 
 <div class="student-dashboard-dash" id="container">
   <div class="row">
@@ -23,6 +20,7 @@
         <div class="task-title">
           Task
         </div>
+        <h3>Tasks Coin Count Value: {{Tasks.coin_value}}</h3>
         {{#if Tasks.name}}
         <div id="task-name">
           {{Tasks.name}}
