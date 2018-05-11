@@ -67,6 +67,19 @@ router.get('/teacher/class/:uuid/manage', isAuthenticated, (req, res, next) => {
     .catch(err => res.json(err))
 })
 
+// Test endpoint to see db query val (DELETE)
+router.get('/student/:uuid/dashboard/test', (req, res, next) => {
+  var uuid = req.params.uuid
+  var coin_count
+  db.Student.findOne({ where: { uuid: uuid } })
+    .then(student => {
+      coin_count = student.coin_count
+      res.json(coin_count)
+    })
+  // db.Task.findAll({ where: { student_uuid: uuid, is_done: false } })
+  //   .then(resp => res.json(resp))
+})
+
 // Student dashboard
 router.get('/student/:uuid/dashboard', (req, res, next) => {
   var uuid = req.params.uuid
