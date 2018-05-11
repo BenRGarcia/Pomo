@@ -1,5 +1,17 @@
 $(function () {
   /**
+   * Teacher clicks button to increment student coins
+   */
+
+  $('button[data-increment-coins=student]').on('click', e => {
+    e.preventDefault()
+    var uuid = $(e.target).data('student-uuid')
+    $.ajax({ url: `/api/class/student/${uuid}/increment`, method: 'PUT' })
+      .then(() => window.location.reload())
+      .catch(() => window.location.reload())
+  })
+
+  /**
    * Teacher assigns tasks to student(s)
    */
 
