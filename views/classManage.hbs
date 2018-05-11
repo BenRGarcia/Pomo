@@ -109,9 +109,8 @@
               </tbody>
             </table>
             {{!-- Add student form --}}
-            <h6>New Student Input <small class="text-danger">(Press enter to add student)</small></h6>
             <form id="js-form-add-student">
-              <div class="input-group mb-4">
+              <div class="input-group">
                 <div class="input-group-prepend">
                   <span class="input-group-text bg-secondary text-white">Add Student Name</span>
                 </div>
@@ -131,13 +130,14 @@
                   required
                 >
               </div>
+              <small class="text-danger">(Press enter to add student)</small>
             </form>
             {{!-- End 'Add student form' --}}
             <span>
               <button
                 id="js-teacher-task-assign"
                 type="button"
-                class="btn btn-outline-success"
+                class="btn btn-outline-success mt-4"
                 data-toggle="modal"
                 data-target="#js-modal-task-assignment"
                 data-delete="class"
