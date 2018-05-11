@@ -1,5 +1,32 @@
 @import './bootstrap.min.css';
 
+.coin-align {
+  width: 50%;
+  text-align: right;
+  font-family: Skranji;
+  color: #FFFFFF;
+  font-size: 36px;
+}
+
+.task-value {
+  font-family: Skranji;
+  color: #754215;
+  text-align: center;
+}
+
+.task-desc {
+  font-family: Skranji;
+  color: #ffffff;
+  text-align: center;
+  font-size: 36px;
+}
+
+.task-desc-body {
+  font-family: Skranji;
+  color: #ffffff;
+  text-align: center;
+  font-size: 18px;
+}
 
 .pomo-head-text {
   font-family: Skranji;
