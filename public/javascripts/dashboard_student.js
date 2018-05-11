@@ -66,10 +66,19 @@ $(function () {
     // Calculate seconds remaining
     var secondsRemaining = calculateSecondsRemaining(startTime, duration)
     console.log(`There are ${secondsRemaining} seconds remaining until the timer hits 0`)
-    // Test if time has run out
-    if (secondsRemaining <= 0) {
-      timeUpOrTaskDone()
-    }
+    timerIntervalToClear = setInterval(() => {
+      var recalculatedSecondsRemaining = calculateSecondsRemaining(startTime, duration)
+      // Test if time has run out
+      if (recalculatedSecondsRemaining <= 0) {
+        timeUpOrTaskDone()
+      }
+      // Convert to minutes and seconds
+      var timeObj = convertToMinutesAndSeconds(recalculatedSecondsRemaining)
+      // Format seconds data for edge cases(pad with '0' if < 10 seconds)
+      if (timeObj.seconds < 10) timeObj.seconds = formatSeconds(timeObj.seconds)
+      // Update DOM with time remaining
+      updateDOMTimer(timeObj)
+    }, 1000)
   }
 
   // After page loads, render to DOM the time duration to spans if timer state is unstarted
@@ -118,6 +127,8 @@ $(function () {
     var uuid = getTaskUUID()
     // Send PUT request
     $.ajax({ url: '/api/task/timer/done', method: 'PUT', data: { uuid } })
+      .then(() => window.location.reload())
+      .catch(() => window.location.reload())
   }
 
   // Event listener for timer start
