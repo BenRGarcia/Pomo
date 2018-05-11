@@ -24,30 +24,41 @@ $(function () {
 
   var formatSeconds = (seconds) => seconds.toString().padStart(2, '0')
 
-  // Call function that handles timer on page load
-  timer()
+  var handleUnstartedTimer = () => {
+    console.log(`handleUnstartedTimer() was just called`)
+    // 1) Get duration attribute from hidden div
+    var duration = $('#js-timer-raw-data').data('duration')
+    // 2) Convert seconds of duration to minutes
+    var timeObj = convertToMinutesAndSeconds(duration)
+    console.log(`handleUnstartedTimer() has received timeObj: { minutes: ${timeObj.minutes}, seconds: ${timeObj.seconds} }`)
+    // 3) Format seconds data for edge cases (pad with '0' if < 10 seconds)
+    if (timeObj.seconds < 10) timeObj.seconds = formatSeconds(timeObj.seconds)
+    // 4) Update DOM with timer data
+    updateDOMTimer(timeObj)
+  }
+
+  var handleStartedTimer = () => {
+    console.log(`handleStartedTimer() was just called`)
+  }
+
   // After page loads, render to DOM the time duration to spans if timer state is unstarted
-  function timer () {
+  var timerHandler = () => {
     console.log(`Timer duration: ${$('#js-timer-raw-data').data('duration')}`)
     // Test if timer is started
     if (timerIsStarted()) {
       // Handle if timer is currently counting down
       console.log(`Timer state is: 'Currently counting down'`)
+      handleStartedTimer()
     } else {
       // Handle if timer is not yet started
       console.log(`Timer state is: 'Not yet counting down'`)
-      // Render timer duration to the DOM
-      // 1) Get duration attribute from hidden div
-      var duration = $('#js-timer-raw-data').data('duration')
-      // 2) Convert seconds of duration to minutes
-      var timeObj = convertToMinutesAndSeconds(duration)
-      console.log(`timer() has received timeObj: { minutes: ${timeObj.minutes}, seconds: ${timeObj.seconds} }`)
-      // 3) Format seconds data for edge cases (pad with '0' if < 10 seconds)
-      if (timeObj.seconds < 10) timeObj.seconds = formatSeconds(timeObj.seconds)
-      // 4) Update DOM with timer data
-      updateDOMTimer(timeObj)
+      handleUnstartedTimer()
     }
   }
+
+  // Call function that handles timer on page load
+  timerHandler()
+
 // // Event listener for timer start
 //   $('body').on('click', '#js-timer-start', e => startTask())
 
