@@ -1,4 +1,5 @@
-@import url(./bootstrap.min.css);
+@import './bootstrap.min.css';
+
 
 .pomo-head-text {
   font-family: Skranji;
